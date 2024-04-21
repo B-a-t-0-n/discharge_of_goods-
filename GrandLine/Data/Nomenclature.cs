@@ -18,7 +18,7 @@ namespace GrandLine.Data
         public string surface { get; set; } = "";
         public string weight { get; set; } = "";
         public string nomenclature_kind { get; set; } = "";
-        public IEnumerable<AddAmountUnits> add_amount_units { get; set; }
+        public IEnumerable<AddAmountUnits>? add_amount_units { get; set; }
 
         public override string ToString()
         {

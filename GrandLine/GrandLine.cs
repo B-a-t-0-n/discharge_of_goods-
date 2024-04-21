@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 
 namespace GrandLine
 {
-    public class GrandLineTable
+    public class GrandLine
     {
         public readonly string _apiKey;
         public Uri UriApi { get; private set; }
         public IEnumerable<Nomenclature>? Nomenclatures { get; private set; }
-      
-        public GrandLineTable(string apiKey) 
+        public IEnumerable<Price>? Prices { get; private set; }
+
+        public GrandLine(string apiKey)
         {
             _apiKey = apiKey;
             UriApi = new Uri("https://client.grandline.ru/api/public");
             UpdateNomenclatures(20);
+            UpdatePrice(20);
         }
 
         private void UpdateNomenclatures(int limit)
         {
             string requestUri = $"{UriApi}/nomenclatures/?api_key={_apiKey}&limit={limit}";
-
-            Console.WriteLine(requestUri);
 
             using (HttpClient client = new HttpClient())
             {
@@ -35,6 +35,17 @@ namespace GrandLine
             }
         }
 
+        private void UpdatePrice(int limit)
+        {
+            string requestUri = $"{UriApi}/prices/?api_key={_apiKey}&limit={limit}";
 
+            Console.WriteLine(requestUri);
+
+            using (HttpClient client = new HttpClient())
+            {
+                Prices = Task.Run(() => client.GetFromJsonAsync<IEnumerable<Price>>(requestUri)).Result;
+            }
+
+        }
     }
 }
