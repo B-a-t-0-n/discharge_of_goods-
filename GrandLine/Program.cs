@@ -8,15 +8,10 @@ class Program
     public static void Main()
     {
         GrandLine.GrandLine grandLine = new GrandLine.GrandLine("ca53919db52e201246b7d2a7f5b73753");
-        List<Nomenclature> branches = (List<Nomenclature>)grandLine.Nomenclatures;
-
-        if (branches != null)
+        foreach (var item in grandLine.Banches!)
         {
-            foreach (var item in branches)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine("------------------------------------------------------------");
-            }
+            Console.WriteLine(item);
+            Console.WriteLine("------------------------------------------------------------");
         }
     }
 }

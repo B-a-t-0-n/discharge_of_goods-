@@ -24,7 +24,7 @@ namespace GrandLine.Data
         {
             return $"{id_1c}\n{code_1c}\n{full_name}\n{size_unit}\n{amount_unit}\n{quantity_unit}\n{type_size_id}\n"+
                    $"{tnved}\n{color}\n{thickness}\n{foil}\n{surface}\n{weight}\n{nomenclature_kind}\n"+
-                   $"{string.Join(' ',add_amount_units)}";
+                   $"{string.Join(' ',add_amount_units!)}";
         }
     }
 }
