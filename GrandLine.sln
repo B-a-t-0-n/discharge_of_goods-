@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandLine", "GrandLine\GrandLine.csproj", "{E9FE074F-E493-45F8-A189-FDE19F3AD54E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandLineApp", "GrandLineApp\GrandLineApp.csproj", "{D210459D-DCFC-43E2-8A11-F74066C61BD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandLineLib", "GrandLineLib\GrandLineLib.csproj", "{DA20D580-BF90-4646-98C3-470AD88BE9E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E9FE074F-E493-45F8-A189-FDE19F3AD54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9FE074F-E493-45F8-A189-FDE19F3AD54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9FE074F-E493-45F8-A189-FDE19F3AD54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D210459D-DCFC-43E2-8A11-F74066C61BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D210459D-DCFC-43E2-8A11-F74066C61BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D210459D-DCFC-43E2-8A11-F74066C61BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D210459D-DCFC-43E2-8A11-F74066C61BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA20D580-BF90-4646-98C3-470AD88BE9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA20D580-BF90-4646-98C3-470AD88BE9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA20D580-BF90-4646-98C3-470AD88BE9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA20D580-BF90-4646-98C3-470AD88BE9E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

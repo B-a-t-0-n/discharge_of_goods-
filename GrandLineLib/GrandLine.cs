@@ -1,15 +1,8 @@
-﻿using GrandLine.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using GrandLineLib.Data;
 using System.Net.Http.Json;
-using System.Runtime.Intrinsics.X86;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GrandLine
+
+namespace GrandLineLib
 {
     public class GrandLine
     {
@@ -26,8 +19,8 @@ namespace GrandLine
             UriApi = new Uri("https://client.grandline.ru/api/public");
             UpdateBranches();
             UpdateAgreements();
-            //UpdateNomenclatures(20);
-            //UpdatePrice(20);
+            UpdateNomenclatures(20);
+            UpdatePrice(20);
         }
 
         private void UpdateNomenclatures(int limit)
@@ -42,14 +35,17 @@ namespace GrandLine
 
         private void UpdatePrice(int limit)
         {
-            string requestUri = $"{UriApi}/prices/?api_key={_apiKey}&nomenclature_id_1c={Nomenclatures!.First().id_1c}";
+            string agreementId1c = string.Join(',', Agreements!.Select(i => i.id_1c.ToString()));
+            string branchId1c = string.Join(',', Banches!.Select(i => i.id_1c.ToString()));
+            Console.WriteLine(agreementId1c);
+            Console.WriteLine(branchId1c);
+            string requestUri = $"{UriApi}/prices/?api_key={_apiKey}&agreement_id_1c={Agreements.First().id_1c}&branch_id_1c={Banches.First().id_1c}&limit{limit}";
 
             Console.WriteLine(requestUri);
 
             using (HttpClient client = new HttpClient())
             {
-                Console.WriteLine(client.GetStringAsync(requestUri).Result);
-                //Prices = Task.Run(() => client.GetFromJsonAsync<IEnumerable<Price>>(requestUri)).Result;
+                Prices = Task.Run(() => client.GetFromJsonAsync<IEnumerable<Price>>(requestUri)).Result;
             }
 
         }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GrandLine.Data
+﻿namespace GrandLineLib.Data
 {
     public class Nomenclature
     {

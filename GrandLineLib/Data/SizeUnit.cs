@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrandLine.Data
+﻿namespace GrandLineLib.Data
 {
-    public class QuantityUnit
+    public class SizeUnit
     {
         public string id_1c { get; set; } = "";
         public string name { get; set; } = "";

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrandLine.Data
+﻿namespace GrandLineLib.Data
 {
     public class Agreement
     {
@@ -17,7 +10,7 @@ namespace GrandLine.Data
         
         public override string ToString()
         {
-            return $"{id_1c}\n{code_1c}\n{name}\n{contractor}\n{additional_agreements}";
+            return $"{id_1c}\n{code_1c}\n{name}\n{contractor}\n{string.Join(' ',additional_agreements!)}";
         }
     }
 }
