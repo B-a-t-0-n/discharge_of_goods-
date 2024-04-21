@@ -1,19 +1,19 @@
-﻿using System;
+﻿using GrandLine.Data;
+using System;
 using System.Net.Http.Json;
 
 class Program
 {
-    
     static HttpClient httpClient = new HttpClient();
 
     public static async Task Main()
     {
-        List<Branches>? branches = await httpClient.GetFromJsonAsync<List<Branches>>($"https://client.grandline.ru/api/public/branches/?api_key=ca53919db52e201246b7d2a7f5b73753");
+        List<Nomenclature>? branches = await httpClient.GetFromJsonAsync<List<Nomenclature>>($"https://client.grandline.ru/api/public/nomenclatures/?api_key=ca53919db52e201246b7d2a7f5b73753&limit=1");
         if (branches != null)
         {
             foreach (var item in branches)
             {
-                Console.WriteLine($"{item.Id1c}\n{item.Code1c}\n{item.Name}\n{item.Address}\n{item.Description}");
+                Console.WriteLine(item);
                 await Console.Out.WriteLineAsync("------------------------------------------------------------");
             }
         } 
