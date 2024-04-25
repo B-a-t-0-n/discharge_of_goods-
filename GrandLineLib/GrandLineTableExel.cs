@@ -16,10 +16,18 @@ namespace GrandLineLib
 
         public void UpdateProducts()
         {
-            for (int i = 0; i < grandLine.Prices!.Count; i++)
-            {
-
-            }
+            Console.WriteLine("start");
+            Products = grandLine.Nomenclatures!.Join(grandLine.Prices!,
+                                                  i => i.id_1c,
+                                                  j => j.nomenclature_id,
+                                                  (i, j) => new Product()
+                                                  {
+                                                      Code1C = i.code_1c,
+                                                      Name = i.full_name,
+                                                      Price = j.price,
+                                                      Discount = j.discount,
+                                                      DiscountPrice = j.discountPrice
+                                                  }).ToList();
         }
 
         public void CreateTable(string savePath)

@@ -1,6 +1,4 @@
 ﻿using GrandLineLib.Data;
-using Microsoft.Office.Interop.Excel;
-using System.Collections.Generic;
 using System.Net.Http.Json;
 namespace GrandLineLib
 {
@@ -10,7 +8,7 @@ namespace GrandLineLib
         public Uri UriApi { get; private set; }
         public List<Nomenclature>? Nomenclatures { get; private set; } = new List<Nomenclature>();
         public List<Price>? Prices { get; private set; } = new List<Price>();
-        public List<Branche>? Banches { get; private set; }
+        public List<Branche>? Branches { get; private set; }
         public List<Agreement>? Agreements { get; private set; }
 
         public GrandLine(string apiKey)
@@ -20,9 +18,30 @@ namespace GrandLineLib
             UpdateBranches();
             UpdateAgreements();
             LoadFullNomenclatures();
-            //UpdatePrice(4,0);
+            LoadFullPrices();
 
 
+        }
+
+        private void LoadFullPrices()
+        {
+            for (int i = 0; i < Agreements!.Count; i++)
+            {
+                for(int j = 0; j < Branches!.Count; j++)
+                {
+                    string agreementId1c = Agreements[i].id_1c;
+                    string branchId1c = Branches[j].id_1c;
+                    int pricesLength = NumberOfEntries("prices", $"&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}");
+
+                    for (int k = 0; k < pricesLength; k += 20000)
+                    {
+                        UpdatePrice(20000, k, agreementId1c, branchId1c);
+                    }
+
+                    return;
+                }
+            }
+            
         }
 
         private void LoadFullNomenclatures()
@@ -62,7 +81,7 @@ namespace GrandLineLib
                 {
                     do
                     {
-                        string requestUri = $"{UriApi}/{nameTable}/?api_key={_apiKey}&limit=1&offset={lastElem.Sum()}";
+                        string requestUri = $"{UriApi}/{nameTable}/?api_key={_apiKey}&limit=1&offset={lastElem.Sum()}{additionalRequest}";
 
                         using (HttpClient client = new HttpClient())
                         {
@@ -108,7 +127,7 @@ namespace GrandLineLib
 
             using (HttpClient client = new HttpClient())
             {
-                Prices = Task.Run(() => client.GetFromJsonAsync<List<Price>>(requestUri)).Result;
+                Prices!.AddRange(Task.Run(() => client.GetFromJsonAsync<List<Price>>(requestUri)).Result!);
             }
 
         }
@@ -121,7 +140,7 @@ namespace GrandLineLib
 
             using (HttpClient client = new HttpClient())
             {
-                Banches = Task.Run(() => client.GetFromJsonAsync<List<Branche>>(requestUri)).Result;
+                Branches = Task.Run(() => client.GetFromJsonAsync<List<Branche>>(requestUri)).Result;
             }
 
         }
