@@ -4,12 +4,11 @@ class Program
 {
     public static void Main()
     {
-        GrandLine grandLine = new GrandLine("ca53919db52e201246b7d2a7f5b73753", false);
-        grandLine.FullLoadingUpdatingOfTables()
+        GrandLine grandLine = new GrandLine("ca53919db52e201246b7d2a7f5b73753", true);
 
         GrandLineTableExel grandLineTable = new GrandLineTableExel(grandLine);
 
-        grandLineTable.UpdateProducts();
+        grandLineTable.CreateTable("C:\\Users\\vlakn\\OneDrive\\Рабочий стол\\C# progect\\Console\\GrandLine\\zxc.xlsx");
 
         Console.WriteLine(">>><<<");
 
