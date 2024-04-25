@@ -16,7 +16,6 @@ namespace GrandLineLib
 
         public void UpdateProducts()
         {
-            Console.WriteLine("start");
             Products = grandLine.Nomenclatures!.Join(grandLine.Prices!,
                                                   i => i.id_1c,
                                                   j => j.nomenclature_id,

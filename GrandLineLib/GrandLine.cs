@@ -1,5 +1,6 @@
 ﻿using GrandLineLib.Data;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 namespace GrandLineLib
 {
     public class GrandLine
@@ -11,37 +12,47 @@ namespace GrandLineLib
         public List<Branche>? Branches { get; private set; }
         public List<Agreement>? Agreements { get; private set; }
 
-        public GrandLine(string apiKey)
+        public GrandLine(string apiKey, bool downnloadingData = true)
         {
             _apiKey = apiKey;
             UriApi = new Uri("https://client.grandline.ru/api/public");
+
             UpdateBranches();
             UpdateAgreements();
-            LoadFullNomenclatures();
-            LoadFullPrices();
 
+            if( downnloadingData )
+                FullLoadingUpdatingOfTables([Agreements!.First().id_1c], [Branches!.First().id_1c]);
 
         }
 
-        private void LoadFullPrices()
+        public void FullLoadingUpdatingOfTables(string[] agreementId1c, string[] branchId1c)
         {
-            for (int i = 0; i < Agreements!.Count; i++)
+            Nomenclatures = new List<Nomenclature>();
+            Prices = new List<Price>();
+            Branches = new List<Branche>();
+            Agreements = new List<Agreement>();
+
+            UpdateBranches();
+            UpdateAgreements();
+            LoadFullNomenclatures();
+            for (int i = 0; i < agreementId1c.Length; i++)
             {
-                for(int j = 0; j < Branches!.Count; j++)
+                for (int j = 0; j < branchId1c.Length; j++)
                 {
-                    string agreementId1c = Agreements[i].id_1c;
-                    string branchId1c = Branches[j].id_1c;
-                    int pricesLength = NumberOfEntries("prices", $"&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}");
-
-                    for (int k = 0; k < pricesLength; k += 20000)
-                    {
-                        UpdatePrice(20000, k, agreementId1c, branchId1c);
-                    }
-
-                    return;
+                    LoadFullPrices(agreementId1c[i], branchId1c[j]);
                 }
             }
             
+        }
+
+        private void LoadFullPrices(string agreementId1c, string branchId1c)
+        {
+            int pricesLength = NumberOfEntries("prices", $"&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}");
+
+            for (int k = 0; k < pricesLength; k += 20000)
+            {
+                UpdatePrice(20000, k, agreementId1c, branchId1c);
+            }
         }
 
         private void LoadFullNomenclatures()
@@ -111,8 +122,6 @@ namespace GrandLineLib
         {
             string requestUri = $"{UriApi}/nomenclatures/?api_key={_apiKey}&limit={limit}&offset={offset}";
 
-            Console.WriteLine(requestUri);
-
             using (HttpClient client = new HttpClient())
             {
                 Nomenclatures!.AddRange(Task.Run(() => client.GetFromJsonAsync<List<Nomenclature>>(requestUri)).Result!);
@@ -122,8 +131,6 @@ namespace GrandLineLib
         private void UpdatePrice(int limit, int offset, string agreementId1c, string branchId1c)
         {
             string requestUri = $"{UriApi}/prices/?api_key={_apiKey}&limit={limit}&offset={offset}&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}";
-
-            Console.WriteLine(requestUri);
 
             using (HttpClient client = new HttpClient())
             {
@@ -136,8 +143,6 @@ namespace GrandLineLib
         {
             string requestUri = $"{UriApi}/branches/?api_key={_apiKey}";
 
-            Console.WriteLine(requestUri);
-
             using (HttpClient client = new HttpClient())
             {
                 Branches = Task.Run(() => client.GetFromJsonAsync<List<Branche>>(requestUri)).Result;
@@ -148,8 +153,6 @@ namespace GrandLineLib
         private void UpdateAgreements()
         {
             string requestUri = $"{UriApi}/agreements/?api_key={_apiKey}";
-
-            Console.WriteLine(requestUri);
 
             using (HttpClient client = new HttpClient())
             {
