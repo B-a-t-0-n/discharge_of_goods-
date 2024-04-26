@@ -47,75 +47,29 @@ namespace GrandLineLib
 
         private void LoadFullPrices(string agreementId1c, string branchId1c)
         {
-            int pricesLength = NumberOfEntries("prices", $"&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}");
+            int i = 0;
+            int pricesLength;
 
-            for (int k = 0; k < pricesLength; k += 20000)
+            do
             {
-                UpdatePrice(20000, k, agreementId1c, branchId1c);
-            }
+                pricesLength = Prices!.Count;
+                UpdatePrice(20000, i, agreementId1c, branchId1c);
+                i += 20000;
+            } while (pricesLength != Prices.Count);
+
         }
 
         private void LoadFullNomenclatures()
         {
-            int nomeraclanturesLength = NumberOfEntries("nomenclatures", "");
-            for (int i = 0; i < nomeraclanturesLength; i += 20000)
+            int nomeraclanturesLength;
+            int i = 0;
+
+            do
             {
+                nomeraclanturesLength = Nomenclatures!.Count;
                 UpdateNomenclatures(20000, i);
-            }
-
-        }
-
-        private int NumberOfEntries(string nameTable, string additionalRequest)
-        { 
-            try
-            {
-                List<int> lastElem = new List<int>() { 1 };
-                List<Object>? table;
-
-                do
-                {
-                    string requestUri = $"{UriApi}/{nameTable}/?api_key={_apiKey}&limit=1&offset={lastElem.Sum()}{additionalRequest}";
-
-                    using (HttpClient client = new HttpClient())
-                    {
-                        table = Task.Run(() => client.GetFromJsonAsync<List<Object>>(requestUri)).Result;
-                    }
-
-                    lastElem[lastElem.Count - 1] *= 10;
-
-                } while (table!.Count != 0);
-
-                lastElem[lastElem.Count - 1] /= 100;
-                int temp = lastElem[lastElem.Count - 1];
-
-                while (temp != 0)
-                {
-                    do
-                    {
-                        string requestUri = $"{UriApi}/{nameTable}/?api_key={_apiKey}&limit=1&offset={lastElem.Sum()}{additionalRequest}";
-
-                        using (HttpClient client = new HttpClient())
-                        {
-                            table = Task.Run(() => client.GetFromJsonAsync<List<Object>>(requestUri)).Result;
-                        }
-
-                        lastElem[lastElem.Count - 1] += temp;
-
-                    } while (table!.Count != 0);
-
-                    lastElem[lastElem.Count - 1] -= temp * 2;
-                    temp /= 10;
-                    lastElem.Add(temp);
-                }
-
-                return lastElem.Sum() - 2;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return 0;
-            }
-            
+                i += 20000;
+            } while (nomeraclanturesLength != Nomenclatures.Count);
         }
 
         private void UpdateNomenclatures(int limit, int offset)
