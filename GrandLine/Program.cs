@@ -1,4 +1,5 @@
 ﻿using GrandLineLib;
+using GrandLineLib.Exel;
 
 class Program
 {
@@ -9,7 +10,7 @@ class Program
         Console.WriteLine(grandLine.Prices!.Count);
         GrandLineTableExel grandLineTable = new GrandLineTableExel(grandLine);
 
-        //grandLineTable.CreateTable("C:\\Users\\vlakn\\OneDrive\\Рабочий стол\\C# progect\\Console\\GrandLine\\zxc.xlsx");
+        grandLineTable.CreateTable("C:\\Users\\vlakn\\OneDrive\\Рабочий стол\\testExel\\test123.xlsx");
 
         Console.WriteLine(">>><<<");
 
