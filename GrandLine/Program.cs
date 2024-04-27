@@ -10,7 +10,7 @@ class Program
         Console.WriteLine(grandLine.Prices!.Count);
         GrandLineTableExel grandLineTable = new GrandLineTableExel(grandLine);
 
-        grandLineTable.CreateTable("C:\\Users\\vlakn\\OneDrive\\Рабочий стол\\testExel\\test123.xlsx");
+        grandLineTable.CreateTable("C:\\Users\\vlakn\\OneDrive\\Рабочий стол\\testExel\\test123.");
 
         Console.WriteLine(">>><<<");
 

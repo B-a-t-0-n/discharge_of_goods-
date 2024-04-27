@@ -10,7 +10,7 @@
         
         public override string ToString()
         {
-            return $"{id_1c}\n{code_1c}\n{name}\n{address}\n{description}";
+            return $"{name}";
         }
     }
 }
