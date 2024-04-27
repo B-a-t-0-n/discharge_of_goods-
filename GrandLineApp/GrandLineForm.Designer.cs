@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            labelInfoLoad = new Label();
             panel2 = new Panel();
             listBoxAgreements = new ListBox();
             panel5 = new Panel();
@@ -42,6 +43,7 @@
             label1 = new Label();
             buttonCreateTable = new Button();
             timer1 = new System.Windows.Forms.Timer(components);
+            panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -51,11 +53,22 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(84, 84, 84);
+            panel1.Controls.Add(labelInfoLoad);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(898, 42);
             panel1.TabIndex = 0;
+            // 
+            // labelInfoLoad
+            // 
+            labelInfoLoad.AutoSize = true;
+            labelInfoLoad.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelInfoLoad.ForeColor = Color.White;
+            labelInfoLoad.Location = new Point(330, 9);
+            labelInfoLoad.Name = "labelInfoLoad";
+            labelInfoLoad.Size = new Size(0, 25);
+            labelInfoLoad.TabIndex = 0;
             // 
             // panel2
             // 
@@ -203,6 +216,8 @@
             Name = "GrandLineForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GrandLine";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
@@ -229,5 +244,6 @@
         private Label label2;
         private Label labelInfo;
         private RichTextBox richTextBoxInfo;
+        private Label labelInfoLoad;
     }
 }

@@ -49,6 +49,7 @@ namespace GrandLineLib.Exel
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return false;
             }
 

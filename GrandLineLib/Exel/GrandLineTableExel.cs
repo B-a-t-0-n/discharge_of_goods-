@@ -42,13 +42,19 @@ namespace GrandLineLib.Exel
         {
             string[,] pr = new string[products.Count, 5];
 
-            for (int i = 0; i < products.Count; i++)
+            pr[0, 0] = "код 1с";
+            pr[0, 1] = "название";
+            pr[0, 2] = "прайс";
+            pr[0, 3] = "скидка";
+            pr[0, 4] = "цена со скидкой";
+
+            for (int i = 1; i <= products.Count; i++)
             {
-                pr[i, 0] = products[i].Code1C;
-                pr[i, 1] = products[i].Name;
-                pr[i, 2] = products[i].Price;
-                pr[i, 3] = products[i].Discount;
-                pr[i, 4] = products[i].DiscountPrice;
+                pr[i, 0] = products[i - 1].Code1C;
+                pr[i, 1] = products[i - 1].Name;
+                pr[i, 2] = products[i - 1].Price;
+                pr[i, 3] = products[i - 1].Discount;
+                pr[i, 4] = products[i - 1].DiscountPrice;
             }
 
             return pr;

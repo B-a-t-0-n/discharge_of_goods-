@@ -41,16 +41,28 @@ namespace GrandLineApp
             sf.ShowDialog();
             var path = sf.FileName;
 
-            Task.Run(() => CreateTableAsync(agreement, branch, path));
+            MessageBox.Show("Началось создание файла\nнажмите 'ок' и ожидайте следуюшее сообщение");
+
+            labelInfoLoad.Text = "идёт создание файла";
+            Task.Run(() => CreateTable(agreement, branch, path));
         }
 
-        private void CreateTableAsync(Agreement? agreement, Branche? branch, string path)
+        private void CreateTable(Agreement? agreement, Branche? branch, string path)
         {
-            _grandLine!.FullLoadingUpdatingOfTables([agreement!.id_1c], [branch!.id_1c]);
+            try
+            {
+                _grandLine!.FullLoadingUpdatingOfTables([agreement!.id_1c], [branch!.id_1c]);
 
-            GrandLineTableExel grandLineTable = new GrandLineTableExel(_grandLine!);
+                GrandLineTableExel grandLineTable = new GrandLineTableExel(_grandLine!);
+                grandLineTable.CreateTable(path);
 
-            grandLineTable.CreateTable(path);
+                MessageBox.Show("файл успешно создан");
+                labelInfoLoad.Text = "";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"возникла ошибка создания файла\n\n{ex}");
+            }
         }
 
         private void listBoxBranches_SelectedIndexChanged(object sender, EventArgs e)
