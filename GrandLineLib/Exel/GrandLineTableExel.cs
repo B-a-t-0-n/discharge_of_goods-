@@ -21,7 +21,7 @@ namespace GrandLineLib.Exel
         public void UpdateProducts()
         {
             Products = grandLine.Nomenclatures!.Join(grandLine.Prices!,
-                                                  i => i.code_1c,
+                                                  i => i.id_1c,
                                                   j => j.nomenclature_id,
                                                   (i, j) => new Product()
                                                   {

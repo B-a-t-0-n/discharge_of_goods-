@@ -62,7 +62,7 @@ namespace GrandLineApp
 
                 MessageBox.Show("файл успешно создан");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"возникла ошибка создания файла\n\n{ex}");
             }

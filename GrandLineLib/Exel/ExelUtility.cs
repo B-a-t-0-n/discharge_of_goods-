@@ -39,14 +39,12 @@ namespace GrandLineLib.Exel
                 oXl.Visible = false;
                 oXl.UserControl = false;
 
-                
-
                 oWb.SaveAs(path, XlFileFormat.xlWorkbookDefault, Type.Missing,
                     Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 oWb.Close(false);
                 oXl.Quit();
-            }
+        }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
