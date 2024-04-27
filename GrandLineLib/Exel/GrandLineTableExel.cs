@@ -21,7 +21,7 @@ namespace GrandLineLib.Exel
         public void UpdateProducts()
         {
             Products = grandLine.Nomenclatures!.Join(grandLine.Prices!,
-                                                  i => i.id_1c,
+                                                  i => i.code_1c,
                                                   j => j.nomenclature_id,
                                                   (i, j) => new Product()
                                                   {
@@ -40,7 +40,7 @@ namespace GrandLineLib.Exel
 
         private string[,] ConvertToMatrixProduct(List<Product> products)
         {
-            string[,] pr = new string[products.Count, 5];
+            string[,] pr = new string[products.Count + 1, 5];
 
             pr[0, 0] = "код 1с";
             pr[0, 1] = "название";

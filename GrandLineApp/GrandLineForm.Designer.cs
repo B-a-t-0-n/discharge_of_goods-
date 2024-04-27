@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             panel1 = new Panel();
             labelInfoLoad = new Label();
             panel2 = new Panel();
@@ -42,7 +41,6 @@
             richTextBoxInfo = new RichTextBox();
             label1 = new Label();
             buttonCreateTable = new Button();
-            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
@@ -234,7 +232,6 @@
         private Panel panel2;
         private Button buttonCreateTable;
         private Panel panel3;
-        private System.Windows.Forms.Timer timer1;
         private ListBox listBoxAgreements;
         private Panel panel5;
         private ListBox listBoxBranches;

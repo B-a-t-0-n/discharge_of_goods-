@@ -25,7 +25,7 @@ namespace GrandLineApp
             listBoxAgreements.Items.AddRange(_grandLine.Agreements!.ToArray());
         }
 
-        private void buttonCreateTable_Click(object sender, EventArgs e)
+        private async void buttonCreateTable_Click(object sender, EventArgs e)
         {
             if (listBoxAgreements.SelectedItem == null || listBoxBranches.SelectedItem == null)
             {
@@ -41,10 +41,14 @@ namespace GrandLineApp
             sf.ShowDialog();
             var path = sf.FileName;
 
+            if (path == "")
+                return;
+
             MessageBox.Show("Началось создание файла\nнажмите 'ок' и ожидайте следуюшее сообщение");
 
             labelInfoLoad.Text = "идёт создание файла";
-            Task.Run(() => CreateTable(agreement, branch, path));
+            await Task.Run(() => CreateTable(agreement, branch, path)).WaitAsync(new TimeSpan(0,10,0), TimeProvider.System);
+            labelInfoLoad.Text = "";
         }
 
         private void CreateTable(Agreement? agreement, Branche? branch, string path)
@@ -57,7 +61,6 @@ namespace GrandLineApp
                 grandLineTable.CreateTable(path);
 
                 MessageBox.Show("файл успешно создан");
-                labelInfoLoad.Text = "";
             }
             catch(Exception ex)
             {
