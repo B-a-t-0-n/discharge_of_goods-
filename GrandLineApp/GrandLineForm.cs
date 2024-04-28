@@ -12,6 +12,9 @@ namespace GrandLineApp
         {
             InitializeComponent();
             LoadData();
+            trackBarSpeed.Maximum = 20000;
+            trackBarSpeed.Minimum = 100;
+            trackBarSpeed.Value = 10000;
         }
 
         private void LoadData()
@@ -35,6 +38,7 @@ namespace GrandLineApp
 
             var agreement = listBoxAgreements.SelectedItem as Agreement;
             var branch = listBoxBranches.SelectedItem as Branche;
+            var numberOfObjects = trackBarSpeed.Value;
 
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "Книга Exel (.xlsx)|*.xlsx";
@@ -47,15 +51,20 @@ namespace GrandLineApp
             MessageBox.Show("Началось создание файла\nнажмите 'ок' и ожидайте следуюшее сообщение");
 
             labelInfoLoad.Text = "идёт создание файла";
-            await Task.Run(() => CreateTable(agreement, branch, path)).WaitAsync(new TimeSpan(0,10,0), TimeProvider.System);
+            timerAnimationLoading.Enabled = true;
+            buttonCreateTable.Enabled = false;
+
+            await Task.Run(() => CreateTable(agreement, branch, path, numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
             labelInfoLoad.Text = "";
+            buttonCreateTable.Enabled = true;
+            timerAnimationLoading.Enabled = false;
         }
 
-        private void CreateTable(Agreement? agreement, Branche? branch, string path)
+        private async Task CreateTable(Agreement? agreement, Branche? branch, string path, int numberOfObjects)
         {
             try
             {
-                _grandLine!.FullLoadingUpdatingOfTables([agreement!.id_1c], [branch!.id_1c]);
+                await Task.Run(() => _grandLine!.FullLoadingUpdatingOfTables([agreement!.id_1c], [branch!.id_1c], numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
 
                 GrandLineTableExel grandLineTable = new GrandLineTableExel(_grandLine!);
                 grandLineTable.CreateTable(path);
@@ -87,10 +96,21 @@ namespace GrandLineApp
                 Agreement ag = (Agreement)listBoxAgreements.SelectedItem;
                 richTextBoxInfo.Text = $"Код 1c = {ag.code_1c}\n\n" +
                                        $"название = {ag.name}\n\n" +
-                                       $"Список доп. соглашений = {string.Join(" ",ag.additional_agreements!)}\n";
-                                 
+                                       $"Список доп. соглашений = {string.Join(" ", ag.additional_agreements!)}\n";
+
             }
         }
 
+        private void timerAnimationLoading_Tick(object sender, EventArgs e)
+        {
+            if(labelInfoLoad.Text.Where(i=> i == '.').Count() < 3) 
+            {
+                labelInfoLoad.Text += ".";
+            }
+            else
+            {
+                labelInfoLoad.Text = labelInfoLoad.Text.Trim('.');
+            }
+        }
     }
 }

@@ -21,31 +21,32 @@ namespace GrandLineLib
             UpdateAgreements();
 
             if( downnloadingData )
-                FullLoadingUpdatingOfTables([Agreements!.First().id_1c], [Branches!.First().id_1c]);
+                Task.Run(() => FullLoadingUpdatingOfTables([Agreements!.First().id_1c], [Branches!.First().id_1c], 20000)).Wait();
 
         }
 
-        public void FullLoadingUpdatingOfTables(string[] agreementId1c, string[] branchId1c)
+        public async Task FullLoadingUpdatingOfTables(string[] agreementId1c, string[] branchId1c, int numberOfObjects)
         {
             Nomenclatures = new List<Nomenclature>();
             Prices = new List<Price>();
             Branches = new List<Branche>();
             Agreements = new List<Agreement>();
 
-            UpdateBranches();
-            UpdateAgreements();
-            LoadFullNomenclatures();
+            await Task.Run(() => UpdateBranches());
+            await Task.Run(() => UpdateAgreements());
+            await Task.Run(() => LoadFullNomenclatures(numberOfObjects));
+
             for (int i = 0; i < agreementId1c.Length; i++)
             {
                 for (int j = 0; j < branchId1c.Length; j++)
                 {
-                    LoadFullPrices(agreementId1c[i], branchId1c[j]);
+                    await Task.Run(() => LoadFullPrices(agreementId1c[i], branchId1c[j], numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
                 }
             }
             
         }
 
-        private void LoadFullPrices(string agreementId1c, string branchId1c)
+        private void LoadFullPrices(string agreementId1c, string branchId1c, int numberOfObjects)
         {
             int i = 0;
             int pricesLength;
@@ -53,13 +54,13 @@ namespace GrandLineLib
             do
             {
                 pricesLength = Prices!.Count;
-                UpdatePrice(20000, i, agreementId1c, branchId1c);
-                i += 20000;
+                UpdatePrice(numberOfObjects, i, agreementId1c, branchId1c);
+                i += numberOfObjects;
             } while (pricesLength != Prices.Count);
 
         }
 
-        private void LoadFullNomenclatures()
+        private void LoadFullNomenclatures(int numberOfObjects)
         {
             int nomeraclanturesLength;
             int i = 0;
@@ -67,8 +68,8 @@ namespace GrandLineLib
             do
             {
                 nomeraclanturesLength = Nomenclatures!.Count;
-                UpdateNomenclatures(20000, i);
-                i += 20000;
+                UpdateNomenclatures(numberOfObjects, i);
+                i += numberOfObjects;
             } while (nomeraclanturesLength != Nomenclatures.Count);
         }
 

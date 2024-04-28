@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Interop.Excel;
 using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace GrandLineLib.Exel
@@ -44,7 +42,7 @@ namespace GrandLineLib.Exel
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 oWb.Close(false);
                 oXl.Quit();
-        }
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());

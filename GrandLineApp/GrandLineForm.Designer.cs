@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
             labelInfoLoad = new Label();
             panel2 = new Panel();
@@ -38,14 +39,20 @@
             panel4 = new Panel();
             label2 = new Label();
             panel3 = new Panel();
+            panel6 = new Panel();
+            label4 = new Label();
+            trackBarSpeed = new TrackBar();
             richTextBoxInfo = new RichTextBox();
             label1 = new Label();
             buttonCreateTable = new Button();
+            timerAnimationLoading = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarSpeed).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -153,6 +160,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(panel6);
             panel3.Controls.Add(richTextBoxInfo);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(buttonCreateTable);
@@ -162,6 +170,35 @@
             panel3.Size = new Size(299, 382);
             panel3.TabIndex = 1;
             // 
+            // panel6
+            // 
+            panel6.Controls.Add(label4);
+            panel6.Controls.Add(trackBarSpeed);
+            panel6.Dock = DockStyle.Bottom;
+            panel6.Location = new Point(0, 267);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(299, 77);
+            panel6.TabIndex = 3;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(6, 4);
+            label4.Name = "label4";
+            label4.Size = new Size(168, 25);
+            label4.TabIndex = 2;
+            label4.Text = "скорость загрузки";
+            // 
+            // trackBarSpeed
+            // 
+            trackBarSpeed.Dock = DockStyle.Bottom;
+            trackBarSpeed.Location = new Point(0, 32);
+            trackBarSpeed.Name = "trackBarSpeed";
+            trackBarSpeed.Size = new Size(299, 45);
+            trackBarSpeed.TabIndex = 0;
+            // 
             // richTextBoxInfo
             // 
             richTextBoxInfo.BackColor = Color.FromArgb(64, 64, 64);
@@ -170,7 +207,7 @@
             richTextBoxInfo.ForeColor = Color.White;
             richTextBoxInfo.Location = new Point(6, 34);
             richTextBoxInfo.Name = "richTextBoxInfo";
-            richTextBoxInfo.Size = new Size(290, 304);
+            richTextBoxInfo.Size = new Size(290, 227);
             richTextBoxInfo.TabIndex = 2;
             richTextBoxInfo.Text = "";
             // 
@@ -202,6 +239,11 @@
             buttonCreateTable.UseVisualStyleBackColor = false;
             buttonCreateTable.Click += buttonCreateTable_Click;
             // 
+            // timerAnimationLoading
+            // 
+            timerAnimationLoading.Interval = 1000;
+            timerAnimationLoading.Tick += timerAnimationLoading_Tick;
+            // 
             // GrandLineForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -213,7 +255,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "GrandLineForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "GrandLine";
+            Text = "GrandLine v3 (test)";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -223,6 +265,9 @@
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarSpeed).EndInit();
             ResumeLayout(false);
         }
 
@@ -242,5 +287,9 @@
         private Label labelInfo;
         private RichTextBox richTextBoxInfo;
         private Label labelInfoLoad;
+        private Panel panel6;
+        private Label label4;
+        private TrackBar trackBarSpeed;
+        private System.Windows.Forms.Timer timerAnimationLoading;
     }
 }
