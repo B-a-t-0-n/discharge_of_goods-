@@ -255,7 +255,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "GrandLineForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "GrandLine v3 (test)";
+            Text = "GrandLine v3";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
