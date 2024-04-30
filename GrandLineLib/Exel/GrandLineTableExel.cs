@@ -52,9 +52,9 @@ namespace GrandLineLib.Exel
             {
                 pr[i, 0] = products[i - 1].Code1C;
                 pr[i, 1] = products[i - 1].Name;
-                pr[i, 2] = products[i - 1].Price;
-                pr[i, 3] = products[i - 1].Discount;
-                pr[i, 4] = products[i - 1].DiscountPrice;
+                pr[i, 2] = products[i - 1].Price.Replace('.',',');
+                pr[i, 3] = products[i - 1].Discount.Replace('.', ',');
+                pr[i, 4] = products[i - 1].DiscountPrice.Replace('.', ',');
             }
 
             return pr;
