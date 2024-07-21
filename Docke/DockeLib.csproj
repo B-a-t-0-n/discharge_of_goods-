@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="111.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Exel\Exel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exel\" />
+  </ItemGroup>
+
 </Project>

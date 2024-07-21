@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using DockeLib;
+
+Docke docke = new Docke("kopytina@everestkrov.ru_1", "zx33cvbn");
+Console.WriteLine(docke.ApiToken);

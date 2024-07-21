@@ -1,7 +1,5 @@
-﻿using Exel = Microsoft.Office.Interop.Excel;
+﻿using Exel;
 using GrandLineLib.Data;
-using Microsoft.Office.Interop.Excel;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GrandLineLib.Exel
 {

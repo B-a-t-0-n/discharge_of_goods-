@@ -1,9 +1,9 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using Range = Microsoft.Office.Interop.Excel.Range;
 
-namespace GrandLineLib.Exel
+namespace Exel
 {
-    static class ExcelUtility
+    public static class ExcelUtility
     {
         public static void WriteArray<T>(this _Worksheet sheet, int startRow, int startColumn, T[,] array)
         {
@@ -13,12 +13,6 @@ namespace GrandLineLib.Exel
             Range c2 = (Range)sheet.Cells[startRow + row - 1, startColumn + col - 1];
             Range range = sheet.Range[c1, c2];
             range.Value = array;
-
-            //for (int i = 0; i < sheet.Columns.Count; i++)
-            //{
-            //    sheet.Columns[i].AutoFit();
-            //}
-
         }
 
         public static bool SaveToExcel<T>(T[,] data, string path)
