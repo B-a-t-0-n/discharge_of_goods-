@@ -10,6 +10,6 @@ namespace DockeLib.Data
     {
         public string? vendor { get; set; }
         public string? measure { get; set; }
-        public string? price { get; set; }
+        public dynamic? price { get; set; }
     }
 }

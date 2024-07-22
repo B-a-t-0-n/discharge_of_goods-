@@ -7,7 +7,6 @@ namespace GrandLineLib.Exel
     {
         public List<Product> Products { get; set; }
         public readonly GrandLine grandLine;
-        private string? _filePath;
 
         public GrandLineTableExel(GrandLine grandLine)
         {
