@@ -16,19 +16,24 @@ namespace DockeLib
         public List<Agrees> Agrees { get; private set; } = null!;
         public List<Product> Products { get; private set; } = new List<Product>();
         public List<PriceProduct> Prices { get; private set; } = new List<PriceProduct>();
+        public List<PriceProduct> PricesRRP { get; private set; } = new List<PriceProduct>();
+        public UserAuth UserAuth { get; set; } = new UserAuth();
 
         public Docke(string login, string password)
         {
             UriApi = new Uri("https://b2b.docke.ru");
-            UpdateUser(login, password);
+            UserAuth.login = login;
+            UserAuth.password = password;
+
+            UpdateUser();
         }
 
-        public async Task UpdateAll(string login, string password, string agree_uuid, string factory_uuid, int speed, bool canBuy)
+        public async Task UpdateAll(string agree_uuid, string factory_uuid, int speed, bool canBuy)
         {
             if (speed < 1 || speed > 5000)
                 throw new Exception("скорость должна быть в пределе от 1 до 5000");
 
-            UpdateUser(login, password);
+            UpdateUser();
 
             RequestPrice requestPrice = new RequestPrice()
             {
@@ -48,27 +53,21 @@ namespace DockeLib
             await UpdateProduct(requestPrice, requestProduct);
         }
 
-        private async Task<User> Auth(string login, string password)
+        private async Task<User> Auth()
         {
             var client = new RestClient(UriApi);
             var request = new RestRequest("/api/client/auth");
 
-            UserAuth userAuth = new UserAuth()
-            {
-                login = login,
-                password = password
-            };
-
-            request.AddBody(JsonSerializer.Serialize(userAuth));
+            request.AddBody(JsonSerializer.Serialize(UserAuth));
 
             User? user = await client.PostAsync<User>(request);
 
             return user!;
         }
 
-        private void UpdateUser(string login, string password)
+        private void UpdateUser()
         {
-            var user = Auth(login, password).Result;
+            var user = Auth().Result;
             ApiToken = user.data!.token!;
             Contragents = user.data!.contragent!;
             Factories = user.data!.factories!;
@@ -92,6 +91,9 @@ namespace DockeLib
         {
             var pricesProducts = await GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
             Prices = pricesProducts.prices!.ToList();
+
+            var pricesRrpProducts = await GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new Prices());
+            PricesRRP = pricesProducts.prices!.ToList();
 
             ListProducts listProducts;
             do

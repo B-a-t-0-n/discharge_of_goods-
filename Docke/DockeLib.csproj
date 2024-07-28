@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Exel\Exel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Exel\" />
-  </ItemGroup>
-
 </Project>
