@@ -14,7 +14,7 @@ namespace AppWindowsForm
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             
-            Application.Run(new DockeForm());
+            Application.Run(new Home());
         }
     }
 }

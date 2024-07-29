@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            panelUser = new Panel();
             panel1 = new Panel();
+            buttonUser = new Button();
             labelInfoLoad = new Label();
             panel2 = new Panel();
             listBoxAgrees = new ListBox();
@@ -41,6 +43,7 @@
             panel3 = new Panel();
             richTextBoxInfo = new RichTextBox();
             panel7 = new Panel();
+            checkBoxBuy = new CheckBox();
             label5 = new Label();
             panel6 = new Panel();
             label4 = new Label();
@@ -48,7 +51,7 @@
             label1 = new Label();
             buttonCreateTable = new Button();
             timerAnimationLoading = new System.Windows.Forms.Timer(components);
-            panel1.SuspendLayout();
+            panelUser.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -58,15 +61,43 @@
             ((System.ComponentModel.ISupportInitialize)trackBarSpeed).BeginInit();
             SuspendLayout();
             // 
+            // panelUser
+            // 
+            panelUser.BackColor = Color.FromArgb(84, 84, 84);
+            panelUser.Controls.Add(panel1);
+            panelUser.Controls.Add(buttonUser);
+            panelUser.Controls.Add(labelInfoLoad);
+            panelUser.Dock = DockStyle.Top;
+            panelUser.Location = new Point(0, 0);
+            panelUser.Name = "panelUser";
+            panelUser.Size = new Size(898, 42);
+            panelUser.TabIndex = 0;
+            // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(84, 84, 84);
-            panel1.Controls.Add(labelInfoLoad);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
+            panel1.BackgroundImage = Properties.Resources.angle_left;
+            panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Cursor = Cursors.Hand;
+            panel1.Location = new Point(12, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(898, 42);
-            panel1.TabIndex = 0;
+            panel1.Size = new Size(30, 28);
+            panel1.TabIndex = 2;
+            panel1.Click += panel1_Click;
+            // 
+            // buttonUser
+            // 
+            buttonUser.BackColor = Color.FromArgb(64, 64, 64);
+            buttonUser.BackgroundImage = Properties.Resources.user__3_;
+            buttonUser.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonUser.Cursor = Cursors.Hand;
+            buttonUser.Enabled = false;
+            buttonUser.FlatAppearance.BorderSize = 0;
+            buttonUser.FlatStyle = FlatStyle.Flat;
+            buttonUser.Location = new Point(850, 0);
+            buttonUser.Name = "buttonUser";
+            buttonUser.Size = new Size(48, 42);
+            buttonUser.TabIndex = 0;
+            buttonUser.UseVisualStyleBackColor = false;
             // 
             // labelInfoLoad
             // 
@@ -189,12 +220,28 @@
             // panel7
             // 
             panel7.BackColor = Color.FromArgb(84, 84, 84);
+            panel7.Controls.Add(checkBoxBuy);
             panel7.Controls.Add(label5);
             panel7.Dock = DockStyle.Bottom;
             panel7.Location = new Point(0, 225);
             panel7.Name = "panel7";
             panel7.Size = new Size(299, 42);
             panel7.TabIndex = 4;
+            // 
+            // checkBoxBuy
+            // 
+            checkBoxBuy.AutoSize = true;
+            checkBoxBuy.Checked = true;
+            checkBoxBuy.CheckState = CheckState.Checked;
+            checkBoxBuy.Cursor = Cursors.Hand;
+            checkBoxBuy.Font = new Font("Segoe UI", 14.25F);
+            checkBoxBuy.ForeColor = Color.White;
+            checkBoxBuy.Location = new Point(6, 9);
+            checkBoxBuy.Name = "checkBoxBuy";
+            checkBoxBuy.Size = new Size(158, 29);
+            checkBoxBuy.TabIndex = 1;
+            checkBoxBuy.Text = "Можно купить";
+            checkBoxBuy.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -275,13 +322,13 @@
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(898, 424);
             Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(panelUser);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "DockeForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Docke v1";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelUser.ResumeLayout(false);
+            panelUser.PerformLayout();
             panel2.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
@@ -299,7 +346,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelUser;
         private Panel panel2;
         private Button buttonCreateTable;
         private Panel panel3;
@@ -319,5 +366,8 @@
         private System.Windows.Forms.Timer timerAnimationLoading;
         private Panel panel7;
         private Label label5;
+        private CheckBox checkBoxBuy;
+        private Button buttonUser;
+        private Panel panel1;
     }
 }

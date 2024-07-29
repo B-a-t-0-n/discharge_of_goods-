@@ -103,7 +103,7 @@ namespace AppWindowsForm
 
         private void timerAnimationLoading_Tick(object sender, EventArgs e)
         {
-            if(labelInfoLoad.Text.Where(i=> i == '.').Count() < 3) 
+            if (labelInfoLoad.Text.Where(i => i == '.').Count() < 3)
             {
                 labelInfoLoad.Text += ".";
             }
@@ -111,6 +111,11 @@ namespace AppWindowsForm
             {
                 labelInfoLoad.Text = labelInfoLoad.Text.Trim('.');
             }
+        }
+
+        private void panel7_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

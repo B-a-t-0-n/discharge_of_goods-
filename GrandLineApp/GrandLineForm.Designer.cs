@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            panel7 = new Panel();
             labelInfoLoad = new Label();
             panel2 = new Panel();
             listBoxAgreements = new ListBox();
@@ -58,12 +59,24 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(84, 84, 84);
+            panel1.Controls.Add(panel7);
             panel1.Controls.Add(labelInfoLoad);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(898, 42);
             panel1.TabIndex = 0;
+            // 
+            // panel7
+            // 
+            panel7.BackgroundImage = Properties.Resources.angle_left;
+            panel7.BackgroundImageLayout = ImageLayout.Zoom;
+            panel7.Cursor = Cursors.Hand;
+            panel7.Location = new Point(12, 8);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(30, 28);
+            panel7.TabIndex = 1;
+            panel7.Click += panel7_Click;
             // 
             // labelInfoLoad
             // 
@@ -291,5 +304,6 @@
         private Label label4;
         private TrackBar trackBarSpeed;
         private System.Windows.Forms.Timer timerAnimationLoading;
+        private Panel panel7;
     }
 }

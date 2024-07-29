@@ -10,10 +10,10 @@ namespace AppWindowsForm
     {
         private Docke? _docke;
 
-        public DockeForm()
+        public DockeForm(Docke docke)
         {
             InitializeComponent();
-            LoadData(new Docke("kopytina@everestkrov.ru_1", "zx33cvbn"));
+            LoadData(docke);
             trackBarSpeed.Maximum = 5000;
             trackBarSpeed.Minimum = 10;
             trackBarSpeed.Value = 5000;
@@ -33,7 +33,7 @@ namespace AppWindowsForm
         {
             if (listBoxAgrees.SelectedItem == null || listBoxFactories.SelectedItem == null)
             {
-                MessageBox.Show("Выберите точку отгрузки и договор");
+                MessageBox.Show("Выберите фабрику и соглашение");
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace AppWindowsForm
         {
             try
             {
-                await _docke!.UpdateAll(agree!.uuid!, factory!.uuid!, trackBarSpeed.Value, true).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
+                await _docke!.UpdateAll(agree!.uuid!, factory!.uuid!, trackBarSpeed.Value, checkBoxBuy.Checked).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
 
                 DockeTableExel grandLineTable = new DockeTableExel(_docke!);
                 grandLineTable.CreateTable(path);
@@ -100,7 +100,7 @@ namespace AppWindowsForm
 
         private void timerAnimationLoading_Tick(object sender, EventArgs e)
         {
-            if(labelInfoLoad.Text.Where(i=> i == '.').Count() < 3) 
+            if (labelInfoLoad.Text.Where(i => i == '.').Count() < 3)
             {
                 labelInfoLoad.Text += ".";
             }
@@ -108,6 +108,11 @@ namespace AppWindowsForm
             {
                 labelInfoLoad.Text = labelInfoLoad.Text.Trim('.');
             }
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
