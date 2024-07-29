@@ -2,7 +2,7 @@ using GrandLineLib.Data;
 using GrandLineLib;
 using GrandLineLib.Exel;
 
-namespace GrandLineApp
+namespace AppWindowsForm
 {
     public partial class GrandLineForm : Form
     {

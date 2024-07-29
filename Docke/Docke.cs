@@ -53,21 +53,21 @@ namespace DockeLib
             await UpdateProduct(requestPrice, requestProduct);
         }
 
-        private async Task<User> Auth()
+        private User Auth()
         {
             var client = new RestClient(UriApi);
             var request = new RestRequest("/api/client/auth");
 
             request.AddBody(JsonSerializer.Serialize(UserAuth));
 
-            User? user = await client.PostAsync<User>(request);
+            User? user = client.Post<User>(request);
 
             return user!;
         }
 
         private void UpdateUser()
         {
-            var user = Auth().Result;
+            var user = Auth();
             ApiToken = user.data!.token!;
             Contragents = user.data!.contragent!;
             Factories = user.data!.factories!;

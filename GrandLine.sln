@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{6676F49C-DF3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{79ED0FC1-B4F7-445E-B6AF-ABBDAEC50832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exel", "Exel\Exel.csproj", "{46385B4F-B2ED-4113-ACDE-79AE9FF12EE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exel", "Exel\Exel.csproj", "{46385B4F-B2ED-4113-ACDE-79AE9FF12EE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

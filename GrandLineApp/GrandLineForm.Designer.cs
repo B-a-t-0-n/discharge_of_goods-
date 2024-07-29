@@ -1,4 +1,4 @@
-﻿namespace GrandLineApp
+﻿namespace AppWindowsForm
 {
     partial class GrandLineForm
     {

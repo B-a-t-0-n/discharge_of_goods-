@@ -1,4 +1,6 @@
-namespace GrandLineApp
+using DockeLib;
+
+namespace AppWindowsForm
 {
     internal static class Program
     {
@@ -11,7 +13,8 @@ namespace GrandLineApp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new GrandLineForm());
+            
+            Application.Run(new DockeForm());
         }
     }
 }
