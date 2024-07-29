@@ -17,27 +17,34 @@ namespace DockeLib.Exel
 
         public void UpdateProducts()
         {
-            Products = docke.Products!.Join(docke.Prices!,
+            Products = docke.Products!.GroupJoin(docke.Prices!,
                                                   i => i.vendor,
                                                   j => j.vendor,
-                                                  (i, j) => new ProductExel()
-                                                  {
-                                                      Vendor = i.vendor,
-                                                      Name = i.nomenclature,
-                                                      Price = j.price
-                                                  }).ToList();
+                                                  (i, jGroup) => new {i, jGroup})
+                                                    .SelectMany(
+                                                        x => x.jGroup.DefaultIfEmpty(),
+                                                        (x, j) => new ProductExel()
+                                                        {
+                                                            Vendor = x.i.vendor,
+                                                            Name = x.i.nomenclature,
+                                                            Price = j != null ? j.price : 0
+                                                        }
+                                                    ).ToList();
 
-            Products = Products.Join(docke.PricesRRP,
+            Products = Products.GroupJoin(docke.PricesRRP!,
                                            i => i.Vendor,
                                            j => j.vendor,
-                                           (i, j) => new ProductExel()
-                                           {
-                                               Vendor = i.Vendor,
-                                               Name = i.Name,
-                                               Price = i.Price,
-                                               RRCPrice = j.price
-                                           }).ToList();
-                                                  
+                                           (i, jGroup) => new { i, jGroup })
+                                                .SelectMany(
+                                                    x => x.jGroup.DefaultIfEmpty(),
+                                                    (x, j) => new ProductExel()
+                                                    {
+                                                        Vendor = x.i.Vendor,
+                                                        Name = x.i.Name,
+                                                        Price = x.i.Price,
+                                                        RRCPrice = j != null ? j.price : 0
+                                                    }
+                                                ).ToList();
         }
 
         public void CreateTable(string filePath)

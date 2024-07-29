@@ -93,7 +93,7 @@ namespace DockeLib
             Prices = pricesProducts.prices!.ToList();
 
             var pricesRrpProducts = await GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new Prices());
-            PricesRRP = pricesProducts.prices!.ToList();
+            PricesRRP = pricesRrpProducts.prices!.ToList();
 
             ListProducts listProducts;
             do
