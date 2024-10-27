@@ -20,7 +20,7 @@ namespace DockeLib.Exel
             Products = docke.Products!.GroupJoin(docke.Prices!,
                                                   i => i.vendor,
                                                   j => j.vendor,
-                                                  (i, jGroup) => new {i, jGroup})
+                                                  (i, jGroup) => new { i, jGroup })
                                                     .SelectMany(
                                                         x => x.jGroup.DefaultIfEmpty(),
                                                         (x, j) => new ProductExel()

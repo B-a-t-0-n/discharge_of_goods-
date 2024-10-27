@@ -1,7 +1,9 @@
 ﻿using DockeLib.Data;
 using DockeLib.DataRequest;
+using DockeLib.Exel.Data;
 using RestSharp;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Text.Json;
 
 namespace DockeLib
@@ -15,8 +17,8 @@ namespace DockeLib
         public List<Factories> Factories { get; private set; } = null!;
         public List<Agrees> Agrees { get; private set; } = null!;
         public List<Product> Products { get; private set; } = new List<Product>();
-        public List<PriceProduct> Prices { get; private set; } = new List<PriceProduct>();
-        public List<PriceProduct> PricesRRP { get; private set; } = new List<PriceProduct>();
+        public List<PriceProductRpp> Prices { get; private set; } = new List<PriceProductRpp>();
+        public List<PriceProductRpp> PricesRRP { get; private set; } = new List<PriceProductRpp>();
         public UserAuth UserAuth { get; set; } = new UserAuth();
 
         public Docke(string login, string password)
@@ -89,12 +91,6 @@ namespace DockeLib
 
         private async Task UpdateProduct(RequestPrice requestPrice, RequestProduct requestProduct)
         {
-            var pricesProducts = await GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
-            Prices = pricesProducts.prices!.ToList();
-
-            var pricesRrpProducts = await GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new Prices());
-            PricesRRP = pricesRrpProducts.prices!.ToList();
-
             ListProducts listProducts;
             do
             {
@@ -102,6 +98,30 @@ namespace DockeLib
                 Products.AddRange(listProducts.products!.ToList());
                 requestProduct.page++;
             } while (listProducts.products!.Count() > 0);
+
+            var pricesProducts = await GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
+
+            var prices = new PricesRpp();
+            prices.prices = new List<PriceProductRpp>();
+
+            foreach (var price in pricesProducts.prices!)
+            {
+                var product = Products.FirstOrDefault(i => i.vendor == price.vendor);
+                var list = prices.prices as List<PriceProductRpp>;
+                list!.Add(
+                    new PriceProductRpp()
+                    {
+                        vendor = price.vendor,
+                        measure = price.prices!.FirstOrDefault(i => i.measure == product!.measure)!.measure,
+                        price = price.prices!.FirstOrDefault(i => i.measure == product!.measure)!.price
+                    }
+                );
+            }
+            
+            Prices = prices.prices!.ToList();
+
+            var pricesRrpProducts = await GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new PricesRpp());
+            PricesRRP = pricesRrpProducts.prices!.ToList();
         }
     }
 }
