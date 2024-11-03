@@ -11,21 +11,9 @@ namespace AppWindowsForm
         public GrandLineForm()
         {
             InitializeComponent();
-            LoadData();
             trackBarSpeed.Maximum = 20000;
             trackBarSpeed.Minimum = 100;
             trackBarSpeed.Value = 10000;
-        }
-
-        private void LoadData()
-        {
-            _grandLine = new GrandLine("ca53919db52e201246b7d2a7f5b73753", false);
-
-            listBoxBranches.Items.Clear();
-            listBoxBranches.Items.AddRange(_grandLine.Branches!.ToArray());
-
-            listBoxAgreements.Items.Clear();
-            listBoxAgreements.Items.AddRange(_grandLine.Agreements!.ToArray());
         }
 
         private async void buttonCreateTable_Click(object sender, EventArgs e)
@@ -54,7 +42,7 @@ namespace AppWindowsForm
             timerAnimationLoading.Enabled = true;
             buttonCreateTable.Enabled = false;
 
-            await Task.Run(() => CreateTable(agreement, branch, path, numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
+            await CreateTable(agreement, branch, path, numberOfObjects);
             labelInfoLoad.Text = "";
             buttonCreateTable.Enabled = true;
             timerAnimationLoading.Enabled = false;
@@ -64,7 +52,7 @@ namespace AppWindowsForm
         {
             try
             {
-                await Task.Run(() => _grandLine!.FullLoadingUpdatingOfTables([agreement!.id_1c], [branch!.id_1c], numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
+                await _grandLine!.FullLoadingUpdatingOfTables(agreement!.id_1c, branch!.id_1c, numberOfObjects);
 
                 GrandLineTableExel grandLineTable = new GrandLineTableExel(_grandLine!);
                 grandLineTable.CreateTable(path);
@@ -113,9 +101,17 @@ namespace AppWindowsForm
             }
         }
 
-        private void panel7_Click(object sender, EventArgs e)
+        private async void GrandLineForm_Load(object sender, EventArgs e)
         {
-            this.Close();
+            _grandLine = new GrandLine("ca53919db52e201246b7d2a7f5b73753");
+
+            await _grandLine.InitializeAsync();
+
+            listBoxBranches.Items.Clear();
+            listBoxBranches.Items.AddRange(_grandLine.Branches!.ToArray());
+
+            listBoxAgreements.Items.Clear();
+            listBoxAgreements.Items.AddRange(_grandLine.Agreements!.ToArray());
         }
     }
 }

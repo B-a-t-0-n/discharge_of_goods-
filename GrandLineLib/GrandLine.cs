@@ -1,5 +1,7 @@
 ﻿using GrandLineLib.Data;
+using System.Collections.Generic;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace GrandLineLib
 {
@@ -7,113 +9,104 @@ namespace GrandLineLib
     {
         public readonly string _apiKey;
         public Uri UriApi { get; private set; }
-        public List<Nomenclature>? Nomenclatures { get; private set; } = new List<Nomenclature>();
-        public List<Price>? Prices { get; private set; } = new List<Price>();
-        public List<Branche>? Branches { get; private set; }
-        public List<Agreement>? Agreements { get; private set; }
+        public List<Nomenclature> Nomenclatures { get; private set; } = new List<Nomenclature>();
+        public List<Price> Prices { get; private set; } = new List<Price>();
+        public List<Branche> Branches { get; private set; } = new List<Branche>();
+        public List<Agreement> Agreements { get; private set; } = new List<Agreement>();
 
-        public GrandLine(string apiKey, bool downnloadingData = true)
+        public GrandLine(string apiKey)
         {
             _apiKey = apiKey;
             UriApi = new Uri("https://client.grandline.ru/api/public");
-
-            UpdateBranches();
-            UpdateAgreements();
-
-            if( downnloadingData )
-                Task.Run(() => FullLoadingUpdatingOfTables([Agreements!.First().id_1c], [Branches!.First().id_1c], 20000)).Wait();
-
         }
 
-        public async Task FullLoadingUpdatingOfTables(string[] agreementId1c, string[] branchId1c, int numberOfObjects)
+        public async Task InitializeAsync()
         {
-            Nomenclatures = new List<Nomenclature>();
-            Prices = new List<Price>();
-            Branches = new List<Branche>();
-            Agreements = new List<Agreement>();
+            Branches.AddRange(await GetDataAsync<Branche>($"/branches/?api_key={_apiKey}"));
+            Agreements.AddRange(await GetDataAsync<Agreement>($"/agreements/?api_key={_apiKey}"));
+        }
 
-            await Task.Run(() => UpdateBranches());
-            await Task.Run(() => UpdateAgreements());
-            await Task.Run(() => LoadFullNomenclatures(numberOfObjects));
+        private async Task<List<T>> GetDataAsync<T>(string requestUrl)
+        {
+            var url = UriApi + requestUrl;
 
-            for (int i = 0; i < agreementId1c.Length; i++)
-            {
-                for (int j = 0; j < branchId1c.Length; j++)
-                {
-                    await Task.Run(() => LoadFullPrices(agreementId1c[i], branchId1c[j], numberOfObjects)).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
-                }
-            }
+            using HttpClient client = new HttpClient();
+            var data = await client.GetFromJsonAsync<List<T>>(url);
             
+            return data ?? new List<T>();
         }
 
-        private void LoadFullPrices(string agreementId1c, string branchId1c, int numberOfObjects)
+
+        public async Task FullLoadingUpdatingOfTables(string agreementId1c, string branchId1c, int numberOfObjects)
         {
-            int i = 0;
-            int pricesLength;
+            Nomenclatures.Clear();
+            Prices.Clear();
+            Branches.Clear();
+            Agreements.Clear();
 
-            do
+            var tasks = new List<Task>
             {
-                pricesLength = Prices!.Count;
-                UpdatePrice(numberOfObjects, i, agreementId1c, branchId1c);
-                i += numberOfObjects;
-            } while (pricesLength != Prices.Count);
+                GetDataAsync<Branche>($"/branches/?api_key={_apiKey}"),
+                GetDataAsync<Agreement>($"/agreements/?api_key={_apiKey}"),
+                LoadFullNomenclatures(numberOfObjects),
+                LoadFullPrices(agreementId1c, branchId1c, numberOfObjects)
+            };
 
+            await Task.WhenAll(tasks);
         }
 
-        private void LoadFullNomenclatures(int numberOfObjects)
+        private async Task LoadFullPrices(string agreementId1c, string branchId1c, int numberOfObjects)
         {
-            int nomeraclanturesLength;
-            int i = 0;
+            int offset = 0;
+            int maxCountRequests = 20;
 
-            do
+            while (true)
             {
-                nomeraclanturesLength = Nomenclatures!.Count;
-                UpdateNomenclatures(numberOfObjects, i);
-                i += numberOfObjects;
-            } while (nomeraclanturesLength != Nomenclatures.Count);
-        }
+                var tasks = new List<Task<List<Price>>>();
+                for (int i = 0; i < maxCountRequests; i++)
+                {
+                    tasks.Add(GetDataAsync<Price>($"/prices/?api_key={_apiKey}&limit={numberOfObjects}&offset={offset + numberOfObjects * i}&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}"));
+                }
 
-        private void UpdateNomenclatures(int limit, int offset)
-        {
-            string requestUri = $"{UriApi}/nomenclatures/?api_key={_apiKey}&limit={limit}&offset={offset}";
+                var results = await Task.WhenAll(tasks);
 
-            using (HttpClient client = new HttpClient())
-            {
-                Nomenclatures!.AddRange(Task.Run(() => client.GetFromJsonAsync<List<Nomenclature>>(requestUri)).Result!);
-            }
-        }
+                foreach (var prices in results)
+                {
+                    Prices.AddRange(prices);
+                    if (prices.Count == 0)
+                        return;
+                }
 
-        private void UpdatePrice(int limit, int offset, string agreementId1c, string branchId1c)
-        {
-            string requestUri = $"{UriApi}/prices/?api_key={_apiKey}&limit={limit}&offset={offset}&agreement_id_1c={agreementId1c}&branch_id_1c={branchId1c}";
-
-            using (HttpClient client = new HttpClient())
-            {
-                Prices!.AddRange(Task.Run(() => client.GetFromJsonAsync<List<Price>>(requestUri)).Result!);
-            }
-
-        }
-
-        private void UpdateBranches()
-        {
-            string requestUri = $"{UriApi}/branches/?api_key={_apiKey}";
-
-            using (HttpClient client = new HttpClient())
-            {
-                Branches = Task.Run(() => client.GetFromJsonAsync<List<Branche>>(requestUri)).Result;
+                offset += numberOfObjects * maxCountRequests;
             }
 
         }
 
-        private void UpdateAgreements()
+        private async Task LoadFullNomenclatures(int numberOfObjects)
         {
-            string requestUri = $"{UriApi}/agreements/?api_key={_apiKey}";
+            int offset = 0;
+            const int maxCountRequests = 20;
 
-            using (HttpClient client = new HttpClient())
+            while(true)
             {
-                Agreements = Task.Run(() => client.GetFromJsonAsync<List<Agreement>>(requestUri)).Result;
-            }
+                var tasks = new List<Task<List<Nomenclature>>>();
 
+                for (int i = 0; i < maxCountRequests; i++)
+                {
+                    tasks.Add(GetDataAsync<Nomenclature>($"/nomenclatures/?api_key={_apiKey}&limit={numberOfObjects}&offset={offset + numberOfObjects * i}"));
+                }
+
+                var results = await Task.WhenAll(tasks);
+
+                foreach (var result in results)
+                {
+                    Nomenclatures.AddRange(result);
+                    if (result.Count == 0)
+                        return;
+                }
+
+                offset += numberOfObjects * maxCountRequests;
+            }
         }
     }
 }

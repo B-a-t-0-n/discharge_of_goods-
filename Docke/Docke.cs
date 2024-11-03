@@ -99,12 +99,18 @@ namespace DockeLib
                 requestProduct.page++;
             } while (listProducts.products!.Count() > 0);
 
-            var pricesProducts = await GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
+            var pricesProducts =  GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
+            var pricesRrpProducts =  GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new PricesRpp());
+
+            await pricesProducts;
+            await pricesRrpProducts;
+
+            PricesRRP = pricesRrpProducts.Result.prices!.ToList();
 
             var prices = new PricesRpp();
             prices.prices = new List<PriceProductRpp>();
 
-            foreach (var price in pricesProducts.prices!)
+            foreach (var price in pricesProducts.Result.prices!)
             {
                 var product = Products.FirstOrDefault(i => i.vendor == price.vendor);
                 var list = prices.prices as List<PriceProductRpp>;
@@ -120,8 +126,7 @@ namespace DockeLib
             
             Prices = prices.prices!.ToList();
 
-            var pricesRrpProducts = await GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new PricesRpp());
-            PricesRRP = pricesRrpProducts.prices!.ToList();
+            
         }
     }
 }

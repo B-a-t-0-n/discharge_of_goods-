@@ -76,7 +76,6 @@
             panel7.Name = "panel7";
             panel7.Size = new Size(30, 28);
             panel7.TabIndex = 1;
-            panel7.Click += panel7_Click;
             // 
             // labelInfoLoad
             // 
@@ -269,6 +268,7 @@
             Name = "GrandLineForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GrandLine v3";
+            Load += GrandLineForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
