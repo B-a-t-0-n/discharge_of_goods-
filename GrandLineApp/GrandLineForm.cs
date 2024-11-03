@@ -13,7 +13,7 @@ namespace AppWindowsForm
             InitializeComponent();
             trackBarSpeed.Maximum = 20000;
             trackBarSpeed.Minimum = 100;
-            trackBarSpeed.Value = 10000;
+            trackBarSpeed.Value = 20000;
         }
 
         private async void buttonCreateTable_Click(object sender, EventArgs e)

@@ -54,7 +54,7 @@ namespace AppWindowsForm
             timerAnimationLoading.Enabled = true;
             buttonCreateTable.Enabled = false;
 
-            await CreateTable(agree, factory, path).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
+            await CreateTable(agree, factory, path);
             labelInfoLoad.Text = "";
             buttonCreateTable.Enabled = true;
             timerAnimationLoading.Enabled = false;

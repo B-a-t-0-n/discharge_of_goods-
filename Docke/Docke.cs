@@ -91,16 +91,34 @@ namespace DockeLib
 
         private async Task UpdateProduct(RequestPrice requestPrice, RequestProduct requestProduct)
         {
-            ListProducts listProducts;
-            do
-            {
-                listProducts = await GetDataAsync(requestProduct, "/api/client/product/get", new ListProducts());
-                Products.AddRange(listProducts.products!.ToList());
-                requestProduct.page++;
-            } while (listProducts.products!.Count() > 0);
+            var pricesProducts = GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
+            var pricesRrpProducts = GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new PricesRpp());
 
-            var pricesProducts =  GetDataAsync(requestPrice, "/api/client/prices/get", new Prices());
-            var pricesRrpProducts =  GetDataAsync(requestPrice, "/api/client/prices/rrp/get", new PricesRpp());
+            int maxCountRequests = 20;
+            bool working = true;
+
+            while(working)
+            {
+                var tasks = new List<Task<ListProducts>>();
+
+                for(int i = 0; i < maxCountRequests; i++)
+                {
+                    tasks.Add(GetDataAsync(requestProduct, "/api/client/product/get", new ListProducts()));
+                    requestProduct.page++;
+                }
+
+                var results = await Task.WhenAll(tasks);
+
+                foreach (var result in results)
+                {
+                    Products.AddRange(result.products!.ToList());
+                    if (result.products!.Count() == 0)
+                        working = false;
+                        break;
+                }
+
+                
+            }
 
             await pricesProducts;
             await pricesRrpProducts;
