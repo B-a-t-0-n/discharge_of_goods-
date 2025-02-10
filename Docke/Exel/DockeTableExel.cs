@@ -27,7 +27,8 @@ namespace DockeLib.Exel
                                                         {
                                                             Vendor = x.i.vendor,
                                                             Name = x.i.nomenclature,
-                                                            Price = j != null ? j.price : 0
+                                                            Price = j != null ? j.price : 0,
+                                                            Measure = j != null ? j.measureName : ""
                                                         }
                                                     ).ToList();
 
@@ -42,9 +43,12 @@ namespace DockeLib.Exel
                                                         Vendor = x.i.Vendor,
                                                         Name = x.i.Name,
                                                         Price = x.i.Price,
-                                                        RRCPrice = j != null ? j.price : 0
+                                                        RRCPrice = j != null ? j.price : 0,
+                                                        Measure = x.i.Measure
                                                     }
                                                 ).ToList();
+
+           
         }
 
         public void CreateTable(string filePath)
@@ -54,12 +58,13 @@ namespace DockeLib.Exel
 
         private string[,] ConvertToMatrixProduct(List<ProductExel> products)
         {
-            string[,] pr = new string[products.Count + 1, 4];
+            string[,] pr = new string[products.Count + 1, 5];
 
             pr[0, 0] = "Артикул";
             pr[0, 1] = "Название";
             pr[0, 2] = "Закупочные цены";
             pr[0, 3] = "РЦЦ цены";
+            pr[0, 4] = "Ед. измерения";
 
             for (int i = 1; i <= products.Count; i++)
             {
@@ -67,6 +72,7 @@ namespace DockeLib.Exel
                 pr[i, 1] = products[i - 1].Name!;
                 pr[i, 2] = $"{products[i - 1].Price!}".Replace('.', ',');
                 pr[i, 3] = $"{products[i - 1].RRCPrice!}".Replace('.', ',');
+                pr[i, 4] = products[i - 1].Measure!;
             }
 
             return pr;

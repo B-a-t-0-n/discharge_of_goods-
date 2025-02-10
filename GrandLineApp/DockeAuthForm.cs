@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DockeLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace AppWindowsForm
         public DockeAuthForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+
+            
         }
     }
 }
