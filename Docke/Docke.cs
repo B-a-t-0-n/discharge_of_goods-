@@ -142,8 +142,7 @@ namespace DockeLib
                 );
             }
 
-            string filePath = @"..\..\..\..\Docke\okei.json";
-            var okeiEntries = OkeiReader.ReadOkeiEntries(filePath);
+            var okeiEntries = OkeiReader.ReadOkeiEntries();
 
             foreach(var price in prices.prices)
             {
