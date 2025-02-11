@@ -141,15 +141,22 @@ namespace DockeLib
                     }
                 );
             }
-
-            var okeiEntries = OkeiReader.ReadOkeiEntries();
-
-            foreach(var price in prices.prices)
+            try
             {
-                price.measureName = okeiEntries.FirstOrDefault(i => i.Code == price.measure)?.Name;
-            }
+                var okeiEntries = OkeiReader.ReadOkeiEntries();
 
-            Prices = prices.prices!.ToList();   
+                foreach (var price in prices.prices)
+                {
+                    price.measureName = okeiEntries.FirstOrDefault(i => i.Code == price.measure)?.Name;
+                }
+
+                Prices = prices.prices!.ToList();
+            }
+            catch
+            {
+                Prices = prices.prices!.ToList();
+            }
+             
         }
     }
 }

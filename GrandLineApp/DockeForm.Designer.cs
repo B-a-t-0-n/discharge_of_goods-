@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             panelUser = new Panel();
             panel1 = new Panel();
-            buttonUser = new Button();
             labelInfoLoad = new Label();
             panel2 = new Panel();
             listBoxAgrees = new ListBox();
@@ -65,7 +64,6 @@
             // 
             panelUser.BackColor = Color.FromArgb(84, 84, 84);
             panelUser.Controls.Add(panel1);
-            panelUser.Controls.Add(buttonUser);
             panelUser.Controls.Add(labelInfoLoad);
             panelUser.Dock = DockStyle.Top;
             panelUser.Location = new Point(0, 0);
@@ -83,21 +81,6 @@
             panel1.Size = new Size(30, 28);
             panel1.TabIndex = 2;
             panel1.Click += panel1_Click;
-            // 
-            // buttonUser
-            // 
-            buttonUser.BackColor = Color.FromArgb(64, 64, 64);
-            buttonUser.BackgroundImage = Properties.Resources.user__3_;
-            buttonUser.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonUser.Cursor = Cursors.Hand;
-            buttonUser.Enabled = false;
-            buttonUser.FlatAppearance.BorderSize = 0;
-            buttonUser.FlatStyle = FlatStyle.Flat;
-            buttonUser.Location = new Point(850, 0);
-            buttonUser.Name = "buttonUser";
-            buttonUser.Size = new Size(48, 42);
-            buttonUser.TabIndex = 0;
-            buttonUser.UseVisualStyleBackColor = false;
             // 
             // labelInfoLoad
             // 
@@ -326,7 +309,8 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "DockeForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Docke v1";
+            Text = "Docke v2";
+            Load += DockeForm_Load;
             panelUser.ResumeLayout(false);
             panelUser.PerformLayout();
             panel2.ResumeLayout(false);
@@ -367,7 +351,6 @@
         private Panel panel7;
         private Label label5;
         private CheckBox checkBoxBuy;
-        private Button buttonUser;
         private Panel panel1;
     }
 }

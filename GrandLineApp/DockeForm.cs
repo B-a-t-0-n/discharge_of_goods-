@@ -114,5 +114,10 @@ namespace AppWindowsForm
         {
             this.Close();
         }
+
+        private void DockeForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

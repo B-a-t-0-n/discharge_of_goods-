@@ -76,6 +76,7 @@
             panel7.Name = "panel7";
             panel7.Size = new Size(30, 28);
             panel7.TabIndex = 1;
+            panel7.Paint += panel7_Paint;
             // 
             // labelInfoLoad
             // 
@@ -267,7 +268,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "GrandLineForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "GrandLine v3";
+            Text = "GrandLine v4";
             Load += GrandLineForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
