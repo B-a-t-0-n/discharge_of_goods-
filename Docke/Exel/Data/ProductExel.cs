@@ -6,6 +6,6 @@
         public string? Name { get; set; }
         public dynamic? Price { get; set; }
         public dynamic? RRCPrice { get; set; }
-        public string? Measure { get; set; }
+        public string? Measure { get; set; } = string.Empty;
     }
 }

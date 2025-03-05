@@ -9,8 +9,8 @@ namespace DockeLib
         {
             try
             {
-                var okeiEntries = JsonConvert.DeserializeObject<List<OkeiEntry>>(OkeiJson.Values) ?? [];
-                return okeiEntries;
+                
+                return OkeiJson.ListValues;
             }
             catch (Exception ex)
             {
@@ -21,958 +21,169 @@ namespace DockeLib
 
     public static class OkeiJson
     {
-        public const string Values =
-            """
-                        [
-                {
-                    "code": "354",
-                    "name": "Секунда",
-                    "shortName": "с",
-                    "codeName": "С"
-                },
-                {
-                    "code": "355",
-                    "name": "Минута",
-                    "shortName": "мин",
-                    "codeName": "МИН"
-                },
-                {
-                    "code": "356",
-                    "name": "Час",
-                    "shortName": "ч",
-                    "codeName": "Ч"
-                },
-                {
-                    "code": "359",
-                    "name": "Сутки",
-                    "shortName": "сут; дн",
-                    "codeName": "СУТ; ДН"
-                },
-                {
-                    "code": "360",
-                    "name": "Неделя",
-                    "shortName": "нед",
-                    "codeName": "НЕД"
-                },
-                {
-                    "code": "361",
-                    "name": "Декада",
-                    "shortName": "дек",
-                    "codeName": "ДЕК"
-                },
-                {
-                    "code": "362",
-                    "name": "Месяц",
-                    "shortName": "мес",
-                    "codeName": "МЕС"
-                },
-                {
-                    "code": "364",
-                    "name": "Квартал",
-                    "shortName": "кварт",
-                    "codeName": "КВАРТ"
-                },
-                {
-                    "code": "365",
-                    "name": "Полугодие",
-                    "shortName": "полгода",
-                    "codeName": "ПОЛГОД"
-                },
-                {
-                    "code": "366",
-                    "name": "Год",
-                    "shortName": "г; лет",
-                    "codeName": "ГОД; ЛЕТ"
-                },
-                {
-                    "code": "368",
-                    "name": "Десятилетие",
-                    "shortName": "деслет",
-                    "codeName": "ДЕСЛЕТ"
-                },
-                {
-                    "code": "003",
-                    "name": "Миллиметр",
-                    "shortName": "мм",
-                    "codeName": "ММ"
-                },
-                {
-                    "code": "004",
-                    "name": "Сантиметр",
-                    "shortName": "см",
-                    "codeName": "СМ"
-                },
-                {
-                    "code": "005",
-                    "name": "Дециметр",
-                    "shortName": "дм",
-                    "codeName": "ДМ"
-                },
-                {
-                    "code": "006",
-                    "name": "Метр",
-                    "shortName": "м",
-                    "codeName": "М"
-                },
-                {
-                    "code": "008",
-                    "name": "Километр; тысяча метров",
-                    "shortName": "км; 103 м",
-                    "codeName": "КМ; ТЫС М"
-                },
-                {
-                    "code": "009",
-                    "name": "Мегаметр; миллион метров",
-                    "shortName": "Мм; 106 м",
-                    "codeName": "МЕГАМ; МЛН М"
-                },
-                {
-                    "code": "039",
-                    "name": "Дюйм (25,4 мм)",
-                    "shortName": "дюйм",
-                    "codeName": "ДЮЙМ"
-                },
-                {
-                    "code": "041",
-                    "name": "Фут (0,3048 м)",
-                    "shortName": "фут",
-                    "codeName": "ФУТ"
-                },
-                {
-                    "code": "043",
-                    "name": "Ярд (0,9144 м)",
-                    "shortName": "ярд",
-                    "codeName": "ЯРД"
-                },
-                {
-                    "code": "047",
-                    "name": "Морская миля (1852 м)",
-                    "shortName": "миля",
-                    "codeName": "МИЛЬ"
-                },
-                {
-                    "code": "160",
-                    "name": "Гектограмм",
-                    "shortName": "гг",
-                    "codeName": "ГГ"
-                },
-                {
-                    "code": "161",
-                    "name": "Миллиграмм",
-                    "shortName": "мг",
-                    "codeName": "МГ"
-                },
-                {
-                    "code": "162",
-                    "name": "Метрический карат",
-                    "shortName": "кар",
-                    "codeName": "КАР"
-                },
-                {
-                    "code": "163",
-                    "name": "Грамм",
-                    "shortName": "г",
-                    "codeName": "Г"
-                },
-                {
-                    "code": "164",
-                    "name": "Микрограмм",
-                    "shortName": "мкг",
-                    "codeName": "МКГ"
-                },
-                {
-                    "code": "166",
-                    "name": "Килограмм",
-                    "shortName": "кг",
-                    "codeName": "КГ"
-                },
-                {
-                    "code": "168",
-                    "name": "Тонна; метрическая тонна (1000 кг)",
-                    "shortName": "т",
-                    "codeName": "Т"
-                },
-                {
-                    "code": "170",
-                    "name": "Килотонна",
-                    "shortName": "103 т",
-                    "codeName": "КТ"
-                },
-                {
-                    "code": "173",
-                    "name": "Сантиграмм",
-                    "shortName": "сг",
-                    "codeName": "СГ"
-                },
-                {
-                    "code": "181",
-                    "name": "Брутто-регистровая тонна (2,8316 м3)",
-                    "shortName": "БРТ",
-                    "codeName": "БРУТТ. РЕГИСТР Т"
-                },
-                {
-                    "code": "185",
-                    "name": "Грузоподъемность в метрических тоннах",
-                    "shortName": "т грп",
-                    "codeName": "Т ГРУЗОПОД"
-                },
-                {
-                    "code": "206",
-                    "name": "Центнер (метрический) (100 кг); гектокилограмм; квинтал1 (метрический); децитонна",
-                    "shortName": "ц",
-                    "codeName": "Ц"
-                },
-                {
-                    "code": "110",
-                    "name": "Кубический миллиметр",
-                    "shortName": "мм3",
-                    "codeName": "ММ3"
-                },
-                {
-                    "code": "111",
-                    "name": "Кубический сантиметр; миллилитр",
-                    "shortName": "см3; мл",
-                    "codeName": "СМ3; МЛ"
-                },
-                {
-                    "code": "112",
-                    "name": "Литр; кубический дециметр",
-                    "shortName": "л; дм3",
-                    "codeName": "Л; ДМ3"
-                },
-                {
-                    "code": "113",
-                    "name": "Кубический метр",
-                    "shortName": "м3",
-                    "codeName": "М3"
-                },
-                {
-                    "code": "118",
-                    "name": "Децилитр",
-                    "shortName": "дл",
-                    "codeName": "ДЛ"
-                },
-                {
-                    "code": "122",
-                    "name": "Гектолитр",
-                    "shortName": "гл",
-                    "codeName": "ГЛ"
-                },
-                {
-                    "code": "126",
-                    "name": "Мегалитр",
-                    "shortName": "Мл",
-                    "codeName": "МЕГАЛ"
-                },
-                {
-                    "code": "131",
-                    "name": "Кубический дюйм (16387,1 мм3)",
-                    "shortName": "дюйм3",
-                    "codeName": "ДЮЙМ3"
-                },
-                {
-                    "code": "132",
-                    "name": "Кубический фут (0,02831685 м3)",
-                    "shortName": "фут3",
-                    "codeName": "ФУТ3"
-                },
-                {
-                    "code": "133",
-                    "name": "Кубический ярд (0,764555 м3)",
-                    "shortName": "ярд3",
-                    "codeName": "ЯРД3"
-                },
-                {
-                    "code": "159",
-                    "name": "Миллион кубических метров",
-                    "shortName": "106 м3",
-                    "codeName": "МЛН М3"
-                },
-                {
-                    "code": "050",
-                    "name": "Квадратный миллиметр",
-                    "shortName": "мм2",
-                    "codeName": "ММ2"
-                },
-                {
-                    "code": "051",
-                    "name": "Квадратный сантиметр",
-                    "shortName": "см2",
-                    "codeName": "СМ2"
-                },
-                {
-                    "code": "053",
-                    "name": "Квадратный дециметр",
-                    "shortName": "дм2",
-                    "codeName": "ДМ2"
-                },
-                {
-                    "code": "055",
-                    "name": "Квадратный метр",
-                    "shortName": "м2",
-                    "codeName": "М2"
-                },
-                {
-                    "code": "058",
-                    "name": "Тысяча квадратных метров",
-                    "shortName": "103 м2",
-                    "codeName": "ТЫС М2"
-                },
-                {
-                    "code": "059",
-                    "name": "Гектар",
-                    "shortName": "га",
-                    "codeName": "ГА"
-                },
-                {
-                    "code": "061",
-                    "name": "Квадратный километр",
-                    "shortName": "км2",
-                    "codeName": "КМ2"
-                },
-                {
-                    "code": "071",
-                    "name": "Квадратный дюйм (645,16 мм2)",
-                    "shortName": "дюйм2",
-                    "codeName": "ДЮЙМ2"
-                },
-                {
-                    "code": "073",
-                    "name": "Квадратный фут (0,092903 м2)",
-                    "shortName": "фут2",
-                    "codeName": "ФУТ2"
-                },
-                {
-                    "code": "075",
-                    "name": "Квадратный ярд (0,8361274 м2)",
-                    "shortName": "ярд2",
-                    "codeName": "ЯРД2"
-                },
-                {
-                    "code": "109",
-                    "name": "Ар (100 м2)",
-                    "shortName": "а",
-                    "codeName": "АР"
-                },
-                {
-                    "code": "212",
-                    "name": "Ватт",
-                    "shortName": "Вт",
-                    "codeName": "ВТ"
-                },
-                {
-                    "code": "214",
-                    "name": "Киловатт",
-                    "shortName": "кВт",
-                    "codeName": "КВТ"
-                },
-                {
-                    "code": "215",
-                    "name": "Мегаватт; тысяча киловатт",
-                    "shortName": "МВт; 103 кВт",
-                    "codeName": "МЕГАВТ; ТЫС КВТ"
-                },
-                {
-                    "code": "222",
-                    "name": "Вольт",
-                    "shortName": "В",
-                    "codeName": "В"
-                },
-                {
-                    "code": "223",
-                    "name": "Киловольт",
-                    "shortName": "кВ",
-                    "codeName": "КВ"
-                },
-                {
-                    "code": "227",
-                    "name": "Киловольт-ампер",
-                    "shortName": "кВ.А",
-                    "codeName": "КВ.А"
-                },
-                {
-                    "code": "228",
-                    "name": "Мегавольт-ампер (тысяча киловольт-ампер)",
-                    "shortName": "МВ.А",
-                    "codeName": "МЕГАВ.А"
-                },
-                {
-                    "code": "230",
-                    "name": "Киловар",
-                    "shortName": "квар",
-                    "codeName": "КВАР"
-                },
-                {
-                    "code": "243",
-                    "name": "Ватт-час",
-                    "shortName": "Вт.ч",
-                    "codeName": "ВТ.Ч"
-                },
-                {
-                    "code": "245",
-                    "name": "Киловатт-час",
-                    "shortName": "кВт.ч",
-                    "codeName": "КВТ.Ч"
-                },
-                {
-                    "code": "246",
-                    "name": "Мегаватт-час; 1000 киловатт-часов",
-                    "shortName": "МВт.ч; 103 кВт.ч",
-                    "codeName": "МЕГАВТ.Ч; ТЫС КВТ.Ч"
-                },
-                {
-                    "code": "247",
-                    "name": "Гигаватт-час (миллион киловатт-часов)",
-                    "shortName": "ГВт.ч",
-                    "codeName": "ГИГАВТ.Ч"
-                },
-                {
-                    "code": "260",
-                    "name": "Ампер",
-                    "shortName": "А",
-                    "codeName": "А"
-                },
-                {
-                    "code": "263",
-                    "name": "Ампер-час (3,6 кКл)",
-                    "shortName": "А.ч",
-                    "codeName": "А.Ч"
-                },
-                {
-                    "code": "264",
-                    "name": "Тысяча ампер-часов",
-                    "shortName": "103 А.ч",
-                    "codeName": "ТЫС А.Ч"
-                },
-                {
-                    "code": "270",
-                    "name": "Кулон",
-                    "shortName": "Кл",
-                    "codeName": "КЛ"
-                },
-                {
-                    "code": "271",
-                    "name": "Джоуль",
-                    "shortName": "Дж",
-                    "codeName": "ДЖ"
-                },
-                {
-                    "code": "273",
-                    "name": "Килоджоуль",
-                    "shortName": "кДж",
-                    "codeName": "КДЖ"
-                },
-                {
-                    "code": "274",
-                    "name": "Ом",
-                    "shortName": "Ом",
-                    "codeName": "ОМ"
-                },
-                {
-                    "code": "280",
-                    "name": "Градус Цельсия",
-                    "shortName": "град. C",
-                    "codeName": "ГРАД ЦЕЛЬС"
-                },
-                {
-                    "code": "281",
-                    "name": "Градус Фаренгейта",
-                    "shortName": "град. F",
-                    "codeName": "ГРАД ФАРЕНГ"
-                },
-                {
-                    "code": "282",
-                    "name": "Кандела",
-                    "shortName": "кд",
-                    "codeName": "КД"
-                },
-                {
-                    "code": "283",
-                    "name": "Люкс",
-                    "shortName": "лк",
-                    "codeName": "ЛК"
-                },
-                {
-                    "code": "284",
-                    "name": "Люмен",
-                    "shortName": "лм",
-                    "codeName": "ЛМ"
-                },
-                {
-                    "code": "288",
-                    "name": "Кельвин",
-                    "shortName": "K",
-                    "codeName": "К"
-                },
-                {
-                    "code": "289",
-                    "name": "Ньютон",
-                    "shortName": "Н",
-                    "codeName": "Н"
-                },
-                {
-                    "code": "290",
-                    "name": "Герц",
-                    "shortName": "Гц",
-                    "codeName": "ГЦ"
-                },
-                {
-                    "code": "291",
-                    "name": "Килогерц",
-                    "shortName": "кГц",
-                    "codeName": "КГЦ"
-                },
-                {
-                    "code": "292",
-                    "name": "Мегагерц",
-                    "shortName": "МГц",
-                    "codeName": "МЕГАГЦ"
-                },
-                {
-                    "code": "294",
-                    "name": "Паскаль",
-                    "shortName": "Па",
-                    "codeName": "ПА"
-                },
-                {
-                    "code": "296",
-                    "name": "Сименс",
-                    "shortName": "См",
-                    "codeName": "СИ"
-                },
-                {
-                    "code": "297",
-                    "name": "Килопаскаль",
-                    "shortName": "кПа",
-                    "codeName": "КПА"
-                },
-                {
-                    "code": "298",
-                    "name": "Мегапаскаль",
-                    "shortName": "МПа",
-                    "codeName": "МЕГАПА"
-                },
-                {
-                    "code": "300",
-                    "name": "Физическая атмосфера (101325 Па)",
-                    "shortName": "атм",
-                    "codeName": "АТМ"
-                },
-                {
-                    "code": "301",
-                    "name": "Техническая атмосфера (98066,5 Па)",
-                    "shortName": "ат",
-                    "codeName": "АТТ"
-                },
-                {
-                    "code": "302",
-                    "name": "Гигабеккерель",
-                    "shortName": "ГБк",
-                    "codeName": "ГИГАБК"
-                },
-                {
-                    "code": "303",
-                    "name": "Килобеккерель",
-                    "shortName": "кБк",
-                    "codeName": "КИЛОБК"
-                },
-                {
-                    "code": "304",
-                    "name": "Милликюри",
-                    "shortName": "мКи",
-                    "codeName": "МКИ"
-                },
-                {
-                    "code": "305",
-                    "name": "Кюри",
-                    "shortName": "Ки",
-                    "codeName": "КИ"
-                },
-                {
-                    "code": "306",
-                    "name": "Грамм делящихся изотопов",
-                    "shortName": "г Д/И",
-                    "codeName": "Г ДЕЛЯЩ ИЗОТОП"
-                },
-                {
-                    "code": "307",
-                    "name": "Мегабеккерель",
-                    "shortName": "МБк",
-                    "codeName": "МЕГАБК"
-                },
-                {
-                    "code": "308",
-                    "name": "Миллибар",
-                    "shortName": "мб",
-                    "codeName": "МБАР"
-                },
-                {
-                    "code": "309",
-                    "name": "Бар",
-                    "shortName": "бар",
-                    "codeName": "БАР"
-                },
-                {
-                    "code": "310",
-                    "name": "Гектобар",
-                    "shortName": "гб",
-                    "codeName": "ГБАР"
-                },
-                {
-                    "code": "312",
-                    "name": "Килобар",
-                    "shortName": "кб",
-                    "codeName": "КБАР"
-                },
-                {
-                    "code": "314",
-                    "name": "Фарад",
-                    "shortName": "Ф",
-                    "codeName": "Ф"
-                },
-                {
-                    "code": "316",
-                    "name": "Килограмм на кубический метр",
-                    "shortName": "кг/м3",
-                    "codeName": "КГ/М3"
-                },
-                {
-                    "code": "320",
-                    "name": "Моль",
-                    "shortName": "моль",
-                    "codeName": "МОЛЬ"
-                },
-                {
-                    "code": "323",
-                    "name": "Беккерель",
-                    "shortName": "Бк",
-                    "codeName": "БК"
-                },
-                {
-                    "code": "324",
-                    "name": "Вебер",
-                    "shortName": "Вб",
-                    "codeName": "ВБ"
-                },
-                {
-                    "code": "327",
-                    "name": "Узел (миля/ч)",
-                    "shortName": "уз",
-                    "codeName": "УЗ"
-                },
-                {
-                    "code": "328",
-                    "name": "Метр в секунду",
-                    "shortName": "м/с",
-                    "codeName": "М/С"
-                },
-                {
-                    "code": "330",
-                    "name": "Оборот в секунду",
-                    "shortName": "об/с",
-                    "codeName": "ОБ/С"
-                },
-                {
-                    "code": "331",
-                    "name": "Оборот в минуту",
-                    "shortName": "об/мин",
-                    "codeName": "ОБ/МИН"
-                },
-                {
-                    "code": "333",
-                    "name": "Километр в час",
-                    "shortName": "км/ч",
-                    "codeName": "КМ/Ч"
-                },
-                {
-                    "code": "335",
-                    "name": "Метр на секунду в квадрате",
-                    "shortName": "м/с2",
-                    "codeName": "М/С2"
-                },
-                {
-                    "code": "349",
-                    "name": "Кулон на килограмм",
-                    "shortName": "Кл/кг",
-                    "codeName": "КЛ/КГ"
-                },
-                {
-                    "code": "499",
-                    "name": "Килограмм в секунду",
-                    "shortName": "кг/с",
-                    "codeName": "КГ/С"
-                },
-                {
-                    "code": "533",
-                    "name": "Тонна пара в час",
-                    "shortName": "т пар/ч",
-                    "codeName": "Т ПАР/Ч"
-                },
-                {
-                    "code": "596",
-                    "name": "Кубический метр в секунду",
-                    "shortName": "м3/с",
-                    "codeName": "М3/С"
-                },
-                {
-                    "code": "598",
-                    "name": "Кубический метр в час",
-                    "shortName": "м3/ч",
-                    "codeName": "М3/Ч"
-                },
-                {
-                    "code": "599",
-                    "name": "Тысяча кубических метров в сутки",
-                    "shortName": "103 м3/сут",
-                    "codeName": "ТЫС М3/СУТ"
-                },
-                {
-                    "code": "616",
-                    "name": "Бобина",
-                    "shortName": "боб",
-                    "codeName": "БОБ"
-                },
-                {
-                    "code": "625",
-                    "name": "Лист",
-                    "shortName": "л.",
-                    "codeName": "ЛИСТ"
-                },
-                {
-                    "code": "626",
-                    "name": "Сто листов",
-                    "shortName": "100 л.",
-                    "codeName": "100 ЛИСТ"
-                },
-                {
-                    "code": "630",
-                    "name": "Тысяча стандартных условных кирпичей",
-                    "shortName": "тыс станд. усл. кирп",
-                    "codeName": "ТЫС СТАНД УСЛ КИРП"
-                },
-                {
-                    "code": "641",
-                    "name": "Дюжина (12 шт.)",
-                    "shortName": "дюжина",
-                    "codeName": "ДЮЖИНА"
-                },
-                {
-                    "code": "657",
-                    "name": "Изделие",
-                    "shortName": "изд",
-                    "codeName": "ИЗД"
-                },
-                {
-                    "code": "683",
-                    "name": "Сто ящиков",
-                    "shortName": "100 ящ.",
-                    "codeName": "100 ЯЩ"
-                },
-                {
-                    "code": "704",
-                    "name": "Набор",
-                    "shortName": "набор",
-                    "codeName": "НАБОР"
-                },
-                {
-                    "code": "715",
-                    "name": "Пара (2 шт.)",
-                    "shortName": "пар",
-                    "codeName": "ПАР"
-                },
-                {
-                    "code": "730",
-                    "name": "Два десятка",
-                    "shortName": "20",
-                    "codeName": "2 ДЕС"
-                },
-                {
-                    "code": "732",
-                    "name": "Десять пар",
-                    "shortName": "10 пар",
-                    "codeName": "ДЕС ПАР"
-                },
-                {
-                    "code": "733",
-                    "name": "Дюжина пар",
-                    "shortName": "дюжина пар",
-                    "codeName": "ДЮЖИНА ПАР"
-                },
-                {
-                    "code": "734",
-                    "name": "Посылка",
-                    "shortName": "посыл",
-                    "codeName": "ПОСЫЛ"
-                },
-                {
-                    "code": "735",
-                    "name": "Часть",
-                    "shortName": "часть",
-                    "codeName": "ЧАСТЬ"
-                },
-                {
-                    "code": "736",
-                    "name": "Рулон",
-                    "shortName": "рул",
-                    "codeName": "РУЛ"
-                },
-                {
-                    "code": "737",
-                    "name": "Дюжина рулонов",
-                    "shortName": "дюжина рул",
-                    "codeName": "ДЮЖИНА РУЛ"
-                },
-                {
-                    "code": "740",
-                    "name": "Дюжина штук",
-                    "shortName": "дюжина шт",
-                    "codeName": "ДЮЖИНА ШТ"
-                },
-                {
-                    "code": "745",
-                    "name": "Элемент",
-                    "shortName": "элем",
-                    "codeName": "ЭЛЕМ"
-                },
-                {
-                    "code": "778",
-                    "name": "Упаковка",
-                    "shortName": "упак",
-                    "codeName": "УПАК"
-                },
-                {
-                    "code": "780",
-                    "name": "Дюжина упаковок",
-                    "shortName": "дюжина упак",
-                    "codeName": "ДЮЖИНА УПАК"
-                },
-                {
-                    "code": "781",
-                    "name": "Сто упаковок",
-                    "shortName": "100 упак",
-                    "codeName": "100 УПАК"
-                },
-                {
-                    "code": "796",
-                    "name": "Штука",
-                    "shortName": "шт",
-                    "codeName": "ШТ"
-                },
-                {
-                    "code": "797",
-                    "name": "Сто штук",
-                    "shortName": "100 шт",
-                    "codeName": "100 ШТ"
-                },
-                {
-                    "code": "798",
-                    "name": "Тысяча штук",
-                    "shortName": "тыс. шт; 1000 шт",
-                    "codeName": "ТЫС ШТ"
-                },
-                {
-                    "code": "799",
-                    "name": "Миллион штук",
-                    "shortName": "106 шт",
-                    "codeName": "МЛН ШТ"
-                },
-                {
-                    "code": "800",
-                    "name": "Миллиард штук",
-                    "shortName": "109 шт",
-                    "codeName": "МЛРД ШТ"
-                },
-                {
-                    "code": "801",
-                    "name": "Биллион штук (Европа); триллион штук",
-                    "shortName": "1012 шт",
-                    "codeName": "БИЛЛ ШТ (ЕВР); ТРИЛЛ ШТ"
-                },
-                {
-                    "code": "802",
-                    "name": "Квинтильон штук (Европа)",
-                    "shortName": "1018 шт",
-                    "codeName": "КВИНТ ШТ"
-                },
-                {
-                    "code": "820",
-                    "name": "Крепость спирта по массе",
-                    "shortName": "креп. спирта по массе",
-                    "codeName": "КРЕП СПИРТ ПО МАССЕ"
-                },
-                {
-                    "code": "821",
-                    "name": "Крепость спирта по объему",
-                    "shortName": "креп. спирта по объему",
-                    "codeName": "КРЕП СПИРТ ПО ОБЪЕМ"
-                },
-                {
-                    "code": "831",
-                    "name": "Литр чистого (100%) спирта",
-                    "shortName": "л 100% спирта",
-                    "codeName": "Л ЧИСТ СПИРТ"
-                },
-                {
-                    "code": "833",
-                    "name": "Гектолитр чистого (100%) спирта",
-                    "shortName": "Гл 100% спирта",
-                    "codeName": "ГЛ ЧИСТ СПИРТ"
-                },
-                {
-                    "code": "841",
-                    "name": "Килограмм пероксида водорода",
-                    "shortName": "кг H2О2",
-                    "codeName": "КГ ПЕРОКСИД ВОДОРОДА"
-                },
-                {
-                    "code": "845",
-                    "name": "Килограмм 90%-го сухого вещества",
-                    "shortName": "кг 90% с/в",
-                    "codeName": "КГ 90 ПРОЦ СУХ ВЕЩ"
-                },
-                {
-                    "code": "847",
-                    "name": "Тонна 90%-го сухого вещества",
-                    "shortName": "т 90% с/в",
-                    "codeName": "Т 90 ПРОЦ СУХ ВЕЩ"
-                },
-                {
-                    "code": "852",
-                    "name": "Килограмм оксида калия",
-                    "shortName": "кг К2О",
-                    "codeName": "КГ ОКСИД КАЛИЯ"
-                },
-                {
-                    "code": "859",
-                    "name": "Килограмм гидроксида калия",
-                    "shortName": "кг КОН",
-                    "codeName": "КГ ГИДРОКСИД КАЛИЯ"
-                },
-                {
-                    "code": "861",
-                    "name": "Килограмм азота",
-                    "shortName": "кг N",
-                    "codeName": "КГ АЗОТ"
-                },
-                {
-                    "code": "863",
-                    "name": "Килограмм гидроксида натрия",
-                    "shortName": "кг NaOH",
-                    "codeName": "КГ ГИДРОКСИД НАТРИЯ"
-                },
-                {
-                    "code": "865",
-                    "name": "Килограмм пятиокиси фосфора",
-                    "shortName": "кг Р2О5",
-                    "codeName": "КГ ПЯТИОКИСЬ ФОСФОРА"
-                },
-                {
-                    "code": "867",
-                    "name": "Килограмм урана",
-                    "shortName": "кг U",
-                    "codeName": "КГ УРАН"
-                }
-            ]
-            """;
+        public static readonly List<OkeiEntry> ListValues = new List<OkeiEntry>
+        {
+            new OkeiEntry { Code = "354", Name = "Секунда", ShortName = "с", CodeName = "С" },
+new OkeiEntry { Code = "355", Name = "Минута", ShortName = "мин", CodeName = "МИН" },
+new OkeiEntry { Code = "356", Name = "Час", ShortName = "ч", CodeName = "Ч" },
+new OkeiEntry { Code = "359", Name = "Сутки", ShortName = "сут; дн", CodeName = "СУТ; ДН" },
+new OkeiEntry { Code = "360", Name = "Неделя", ShortName = "нед", CodeName = "НЕД" },
+new OkeiEntry { Code = "361", Name = "Декада", ShortName = "дек", CodeName = "ДЕК" },
+new OkeiEntry { Code = "362", Name = "Месяц", ShortName = "мес", CodeName = "МЕС" },
+new OkeiEntry { Code = "364", Name = "Квартал", ShortName = "кварт", CodeName = "КВАРТ" },
+new OkeiEntry { Code = "365", Name = "Полугодие", ShortName = "полгода", CodeName = "ПОЛГОД" },
+new OkeiEntry { Code = "366", Name = "Год", ShortName = "г; лет", CodeName = "ГОД; ЛЕТ" },
+new OkeiEntry { Code = "368", Name = "Десятилетие", ShortName = "деслет", CodeName = "ДЕСЛЕТ" },
+new OkeiEntry { Code = "003", Name = "Миллиметр", ShortName = "мм", CodeName = "ММ" },
+new OkeiEntry { Code = "004", Name = "Сантиметр", ShortName = "см", CodeName = "СМ" },
+new OkeiEntry { Code = "005", Name = "Дециметр", ShortName = "дм", CodeName = "ДМ" },
+new OkeiEntry { Code = "006", Name = "Метр", ShortName = "м", CodeName = "М" },
+new OkeiEntry { Code = "008", Name = "Километр; тысяча метров", ShortName = "км; 103 м", CodeName = "КМ; ТЫС М" },
+new OkeiEntry { Code = "009", Name = "Мегаметр; миллион метров", ShortName = "Мм; 106 м", CodeName = "МЕГАМ; МЛН М" },
+new OkeiEntry { Code = "039", Name = "Дюйм (25,4 мм)", ShortName = "дюйм", CodeName = "ДЮЙМ" },
+new OkeiEntry { Code = "041", Name = "Фут (0,3048 м)", ShortName = "фут", CodeName = "ФУТ" },
+new OkeiEntry { Code = "043", Name = "Ярд (0,9144 м)", ShortName = "ярд", CodeName = "ЯРД" },
+new OkeiEntry { Code = "047", Name = "Морская миля (1852 м)", ShortName = "миля", CodeName = "МИЛЬ" },
+new OkeiEntry { Code = "160", Name = "Гектограмм", ShortName = "гг", CodeName = "ГГ" },
+new OkeiEntry { Code = "161", Name = "Миллиграмм", ShortName = "мг", CodeName = "МГ" },
+new OkeiEntry { Code = "162", Name = "Метрический карат", ShortName = "кар", CodeName = "КАР" },
+new OkeiEntry { Code = "163", Name = "Грамм", ShortName = "г", CodeName = "Г" },
+new OkeiEntry { Code = "164", Name = "Микрограмм", ShortName = "мкг", CodeName = "МКГ" },
+new OkeiEntry { Code = "166", Name = "Килограмм", ShortName = "кг", CodeName = "КГ" },
+new OkeiEntry { Code = "168", Name = "Тонна; метрическая тонна (1000 кг)", ShortName = "т", CodeName = "Т" },
+new OkeiEntry { Code = "170", Name = "Килотонна", ShortName = "103 т", CodeName = "КТ" },
+new OkeiEntry { Code = "173", Name = "Сантиграмм", ShortName = "сг", CodeName = "СГ" },
+new OkeiEntry { Code = "181", Name = "Брутто-регистровая тонна (2,8316 м3)", ShortName = "БРТ", CodeName = "БРУТТ. РЕГИСТР Т" },
+new OkeiEntry { Code = "185", Name = "Грузоподъемность в метрических тоннах", ShortName = "т грп", CodeName = "Т ГРУЗОПОД" },
+new OkeiEntry { Code = "206", Name = "Центнер (метрический) (100 кг); гектокилограмм; квинтал1 (метрический); децитонна", ShortName = "ц", CodeName = "Ц" },
+new OkeiEntry { Code = "110", Name = "Кубический миллиметр", ShortName = "мм3", CodeName = "ММ3" },
+new OkeiEntry { Code = "111", Name = "Кубический сантиметр; миллилитр", ShortName = "см3; мл", CodeName = "СМ3; МЛ" },
+new OkeiEntry { Code = "112", Name = "Литр; кубический дециметр", ShortName = "л; дм3", CodeName = "Л; ДМ3" },
+new OkeiEntry { Code = "113", Name = "Кубический метр", ShortName = "м3", CodeName = "М3" },
+new OkeiEntry { Code = "118", Name = "Децилитр", ShortName = "дл", CodeName = "ДЛ" },
+new OkeiEntry { Code = "122", Name = "Гектолитр", ShortName = "гл", CodeName = "ГЛ" },
+new OkeiEntry { Code = "126", Name = "Мегалитр", ShortName = "Мл", CodeName = "МЕГАЛ" },
+new OkeiEntry { Code = "131", Name = "Кубический дюйм (16387,1 мм3)", ShortName = "дюйм3", CodeName = "ДЮЙМ3" },
+new OkeiEntry { Code = "132", Name = "Кубический фут (0,02831685 м3)", ShortName = "фут3", CodeName = "ФУТ3" },
+new OkeiEntry { Code = "133", Name = "Кубический ярд (0,764555 м3)", ShortName = "ярд3", CodeName = "ЯРД3" },
+new OkeiEntry { Code = "159", Name = "Миллион кубических метров", ShortName = "106 м3", CodeName = "МЛН М3" },
+new OkeiEntry { Code = "050", Name = "Квадратный миллиметр", ShortName = "мм2", CodeName = "ММ2" },
+new OkeiEntry { Code = "051", Name = "Квадратный сантиметр", ShortName = "см2", CodeName = "СМ2" },
+new OkeiEntry { Code = "053", Name = "Квадратный дециметр", ShortName = "дм2", CodeName = "ДМ2" },
+new OkeiEntry { Code = "055", Name = "Квадратный метр", ShortName = "м2", CodeName = "М2" },
+new OkeiEntry { Code = "058", Name = "Тысяча квадратных метров", ShortName = "103 м2", CodeName = "ТЫС М2" },
+new OkeiEntry { Code = "059", Name = "Гектар", ShortName = "га", CodeName = "ГА" },
+new OkeiEntry { Code = "061", Name = "Квадратный километр", ShortName = "км2", CodeName = "КМ2" },
+new OkeiEntry { Code = "071", Name = "Квадратный дюйм (645,16 мм2)", ShortName = "дюйм2", CodeName = "ДЮЙМ2" },
+new OkeiEntry { Code = "073", Name = "Квадратный фут (0,092903 м2)", ShortName = "фут2", CodeName = "ФУТ2" },
+new OkeiEntry { Code = "075", Name = "Квадратный ярд (0,8361274 м2)", ShortName = "ярд2", CodeName = "ЯРД2" },
+new OkeiEntry { Code = "109", Name = "Ар (100 м2)", ShortName = "а", CodeName = "АР" },
+new OkeiEntry { Code = "212", Name = "Ватт", ShortName = "Вт", CodeName = "ВТ" },
+new OkeiEntry { Code = "214", Name = "Киловатт", ShortName = "кВт", CodeName = "КВТ" },
+new OkeiEntry { Code = "215", Name = "Мегаватт; тысяча киловатт", ShortName = "МВт; 103 кВт", CodeName = "МЕГАВТ; ТЫС КВТ" },
+new OkeiEntry { Code = "222", Name = "Вольт", ShortName = "В", CodeName = "В" },
+new OkeiEntry { Code = "223", Name = "Киловольт", ShortName = "кВ", CodeName = "КВ" },
+new OkeiEntry { Code = "227", Name = "Киловольт-ампер", ShortName = "кВ.А", CodeName = "КВ.А" },
+new OkeiEntry { Code = "228", Name = "Мегавольт-ампер (тысяча киловольт-ампер)", ShortName = "МВ.А", CodeName = "МЕГАВ.А" },
+new OkeiEntry { Code = "230", Name = "Киловар", ShortName = "квар", CodeName = "КВАР" },
+new OkeiEntry { Code = "243", Name = "Ватт-час", ShortName = "Вт.ч", CodeName = "ВТ.Ч" },
+new OkeiEntry { Code = "245", Name = "Киловатт-час", ShortName = "кВт.ч", CodeName = "КВТ.Ч" },
+new OkeiEntry { Code = "246", Name = "Мегаватт-час; 1000 киловатт-часов", ShortName = "МВт.ч; 103 кВт.ч", CodeName = "МЕГАВТ.Ч; ТЫС КВТ.Ч" },
+new OkeiEntry { Code = "247", Name = "Гигаватт-час (миллион киловатт-часов)", ShortName = "ГВт.ч", CodeName = "ГИГАВТ.Ч" },
+new OkeiEntry { Code = "260", Name = "Ампер", ShortName = "А", CodeName = "А" },
+new OkeiEntry { Code = "263", Name = "Ампер-час (3,6 кКл)", ShortName = "А.ч", CodeName = "А.Ч" },
+new OkeiEntry { Code = "264", Name = "Тысяча ампер-часов", ShortName = "103 А.ч", CodeName = "ТЫС А.Ч" },
+new OkeiEntry { Code = "270", Name = "Кулон", ShortName = "Кл", CodeName = "КЛ" },
+new OkeiEntry { Code = "271", Name = "Джоуль", ShortName = "Дж", CodeName = "ДЖ" },
+new OkeiEntry { Code = "273", Name = "Килоджоуль", ShortName = "кДж", CodeName = "КДЖ" },
+new OkeiEntry { Code = "274", Name = "Ом", ShortName = "Ом", CodeName = "ОМ" },
+new OkeiEntry { Code = "280", Name = "Градус Цельсия", ShortName = "град. C", CodeName = "ГРАД ЦЕЛЬС" },
+new OkeiEntry { Code = "281", Name = "Градус Фаренгейта", ShortName = "град. F", CodeName = "ГРАД ФАРЕНГ" },
+new OkeiEntry { Code = "282", Name = "Кандела", ShortName = "кд", CodeName = "КД" },
+new OkeiEntry { Code = "283", Name = "Люкс", ShortName = "лк", CodeName = "ЛК" },
+new OkeiEntry { Code = "284", Name = "Люмен", ShortName = "лм", CodeName = "ЛМ" },
+new OkeiEntry { Code = "288", Name = "Кельвин", ShortName = "K", CodeName = "К" },
+new OkeiEntry { Code = "289", Name = "Ньютон", ShortName = "Н", CodeName = "Н" },
+new OkeiEntry { Code = "290", Name = "Герц", ShortName = "Гц", CodeName = "ГЦ" },
+new OkeiEntry { Code = "291", Name = "Килогерц", ShortName = "кГц", CodeName = "КГЦ" },
+new OkeiEntry { Code = "292", Name = "Мегагерц", ShortName = "МГц", CodeName = "МЕГАГЦ" },
+new OkeiEntry { Code = "294", Name = "Паскаль", ShortName = "Па", CodeName = "ПА" },
+new OkeiEntry { Code = "296", Name = "Сименс", ShortName = "См", CodeName = "СИ" },
+new OkeiEntry { Code = "297", Name = "Килопаскаль", ShortName = "кПа", CodeName = "КПА" },
+new OkeiEntry { Code = "298", Name = "Мегапаскаль", ShortName = "МПа", CodeName = "МЕГАПА" },
+new OkeiEntry { Code = "300", Name = "Физическая атмосфера (101325 Па)", ShortName = "атм", CodeName = "АТМ" },
+new OkeiEntry { Code = "301", Name = "Техническая атмосфера (98066,5 Па)", ShortName = "ат", CodeName = "АТТ" },
+new OkeiEntry { Code = "302", Name = "Гигабеккерель", ShortName = "ГБк", CodeName = "ГИГАБК" },
+new OkeiEntry { Code = "303", Name = "Килобеккерель", ShortName = "кБк", CodeName = "КИЛОБК" },
+new OkeiEntry { Code = "304", Name = "Милликюри", ShortName = "мКи", CodeName = "МКИ" },
+new OkeiEntry { Code = "305", Name = "Кюри", ShortName = "Ки", CodeName = "КИ" },
+new OkeiEntry { Code = "306", Name = "Грамм делящихся изотопов", ShortName = "г Д/И", CodeName = "Г ДЕЛЯЩ ИЗОТОП" },
+new OkeiEntry { Code = "307", Name = "Мегабеккерель", ShortName = "МБк", CodeName = "МЕГАБК" },
+new OkeiEntry { Code = "308", Name = "Миллибар", ShortName = "мб", CodeName = "МБАР" },
+new OkeiEntry { Code = "309", Name = "Бар", ShortName = "бар", CodeName = "БАР" },
+            new OkeiEntry { Code = "310", Name = "Гектобар", ShortName = "гб", CodeName = "ГБАР" },
+            new OkeiEntry { Code = "312", Name = "Килобар", ShortName = "кб", CodeName = "КБАР" },
+            new OkeiEntry { Code = "314", Name = "Фарад", ShortName = "Ф", CodeName = "Ф" },
+            new OkeiEntry { Code = "316", Name = "Килограмм на кубический метр", ShortName = "кг/м3", CodeName = "КГ/М3" },
+            new OkeiEntry { Code = "320", Name = "Моль", ShortName = "моль", CodeName = "МОЛЬ" },
+            new OkeiEntry { Code = "323", Name = "Беккерель", ShortName = "Бк", CodeName = "БК" },
+            new OkeiEntry { Code = "324", Name = "Вебер", ShortName = "Вб", CodeName = "ВБ" },
+            new OkeiEntry { Code = "327", Name = "Узел (миля/ч)", ShortName = "уз", CodeName = "УЗ" },
+            new OkeiEntry { Code = "328", Name = "Метр в секунду", ShortName = "м/с", CodeName = "М/С" },
+            new OkeiEntry { Code = "330", Name = "Оборот в секунду", ShortName = "об/с", CodeName = "ОБ/С" },
+            new OkeiEntry { Code = "331", Name = "Оборот в минуту", ShortName = "об/мин", CodeName = "ОБ/МИН" },
+            new OkeiEntry { Code = "333", Name = "Километр в час", ShortName = "км/ч", CodeName = "КМ/Ч" },
+            new OkeiEntry { Code = "335", Name = "Метр на секунду в квадрате", ShortName = "м/с2", CodeName = "М/С2" },
+            new OkeiEntry { Code = "349", Name = "Кулон на килограмм", ShortName = "Кл/кг", CodeName = "КЛ/КГ" },
+            new OkeiEntry { Code = "499", Name = "Килограмм в секунду", ShortName = "кг/с", CodeName = "КГ/С" },
+            new OkeiEntry { Code = "533", Name = "Тонна пара в час", ShortName = "т пар/ч", CodeName = "Т ПАР/Ч" },
+            new OkeiEntry { Code = "596", Name = "Кубический метр в секунду", ShortName = "м3/с", CodeName = "М3/С" },
+            new OkeiEntry { Code = "598", Name = "Кубический метр в час", ShortName = "м3/ч", CodeName = "М3/Ч" },
+            new OkeiEntry { Code = "599", Name = "Тысяча кубических метров в сутки", ShortName = "103 м3/сут", CodeName = "ТЫС М3/СУТ" },
+            new OkeiEntry { Code = "616", Name = "Бобина", ShortName = "боб", CodeName = "БОБ" },
+            new OkeiEntry { Code = "625", Name = "Лист", ShortName = "л.", CodeName = "ЛИСТ" },
+            new OkeiEntry { Code = "626", Name = "Сто листов", ShortName = "100 л.", CodeName = "100 ЛИСТ" },
+            new OkeiEntry { Code = "630", Name = "Тысяча стандартных условных кирпичей", ShortName = "тыс станд. усл. кирп", CodeName = "ТЫС СТАНД УСЛ КИРП" },
+            new OkeiEntry { Code = "641", Name = "Дюжина (12 шт.)", ShortName = "дюжина", CodeName = "ДЮЖИНА" },
+            new OkeiEntry { Code = "657", Name = "Изделие", ShortName = "изд", CodeName = "ИЗД" },
+            new OkeiEntry { Code = "683", Name = "Сто ящиков", ShortName = "100 ящ.", CodeName = "100 ЯЩ" },
+            new OkeiEntry { Code = "704", Name = "Набор", ShortName = "набор", CodeName = "НАБОР" },
+            new OkeiEntry { Code = "715", Name = "Пара (2 шт.)", ShortName = "пар", CodeName = "ПАР" },
+            new OkeiEntry { Code = "730", Name = "Два десятка", ShortName = "20", CodeName = "2 ДЕС" },
+            new OkeiEntry { Code = "732", Name = "Десять пар", ShortName = "10 пар", CodeName = "ДЕС ПАР" },
+            new OkeiEntry { Code = "733", Name = "Дюжина пар", ShortName = "дюжина пар", CodeName = "ДЮЖИНА ПАР" },
+            new OkeiEntry { Code = "734", Name = "Посылка", ShortName = "посыл", CodeName = "ПОСЫЛ" },
+            new OkeiEntry { Code = "735", Name = "Часть", ShortName = "часть", CodeName = "ЧАСТЬ" },
+            new OkeiEntry { Code = "736", Name = "Рулон", ShortName = "рул", CodeName = "РУЛ" },
+            new OkeiEntry { Code = "737", Name = "Дюжина рулонов", ShortName = "дюжина рул", CodeName = "ДЮЖИНА РУЛ" },
+            new OkeiEntry { Code = "740", Name = "Дюжина штук", ShortName = "дюжина шт", CodeName = "ДЮЖИНА ШТ" },
+            new OkeiEntry { Code = "745", Name = "Элемент", ShortName = "элем", CodeName = "ЭЛЕМ" },
+            new OkeiEntry { Code = "778", Name = "Упаковка", ShortName = "упак", CodeName = "УПАК" },
+            new OkeiEntry { Code = "780", Name = "Дюжина упаковок", ShortName = "дюжина упак", CodeName = "ДЮЖИНА УПАК" },
+            new OkeiEntry { Code = "781", Name = "Сто упаковок", ShortName = "100 упак", CodeName = "100 УПАК" },
+            new OkeiEntry { Code = "796", Name = "Штука", ShortName = "шт", CodeName = "ШТ" },
+            new OkeiEntry { Code = "797", Name = "Сто штук", ShortName = "100 шт", CodeName = "100 ШТ" },
+            new OkeiEntry { Code = "798", Name = "Тысяча штук", ShortName = "тыс. шт; 1000 шт", CodeName = "ТЫС ШТ" },
+            new OkeiEntry { Code = "799", Name = "Миллион штук", ShortName = "106 шт", CodeName = "МЛН ШТ" },
+            new OkeiEntry { Code = "800", Name = "Миллиард штук", ShortName = "109 шт", CodeName = "МЛРД ШТ" },
+            new OkeiEntry { Code = "801", Name = "Биллион штук (Европа); триллион штук", ShortName = "1012 шт", CodeName = "БИЛЛ ШТ (ЕВР); ТРИЛЛ ШТ" },
+            new OkeiEntry { Code = "802", Name = "Квинтильон штук (Европа)", ShortName = "1018 шт", CodeName = "КВИНТ ШТ" },
+            new OkeiEntry { Code = "820", Name = "Крепость спирта по массе", ShortName = "креп. спирта по массе", CodeName = "КРЕП СПИРТ ПО МАССЕ" },
+            new OkeiEntry { Code = "821", Name = "Крепость спирта по объему", ShortName = "креп. спирта по объему", CodeName = "КРЕП СПИРТ ПО ОБЪЕМ" },
+            new OkeiEntry { Code = "831", Name = "Литр чистого (100%) спирта", ShortName = "л 100% спирта", CodeName = "Л ЧИСТ СПИРТ" },
+            new OkeiEntry { Code = "833", Name = "Гектолитр чистого (100%) спирта", ShortName = "Гл 100% спирта", CodeName = "ГЛ ЧИСТ СПИРТ" },
+            new OkeiEntry { Code = "841", Name = "Килограмм пероксида водорода", ShortName = "кг H2О2", CodeName = "КГ ПЕРОКСИД ВОДОРОДА" },
+            new OkeiEntry { Code = "845", Name = "Килограмм 90%-го сухого вещества", ShortName = "кг 90% с/в", CodeName = "КГ 90 ПРОЦ СУХ ВЕЩ" },
+            new OkeiEntry { Code = "847", Name = "Тонна 90%-го сухого вещества", ShortName = "т 90% с/в", CodeName = "Т 90 ПРОЦ СУХ ВЕЩ" },
+            new OkeiEntry { Code = "852", Name = "Килограмм оксида калия", ShortName = "кг К2О", CodeName = "КГ ОКСИД КАЛИЯ" },
+            new OkeiEntry { Code = "859", Name = "Килограмм гидроксида калия", ShortName = "кг КОН", CodeName = "КГ ГИДРОКСИД КАЛИЯ" },
+            new OkeiEntry { Code = "861", Name = "Килограмм азота", ShortName = "кг N", CodeName = "КГ АЗОТ" },
+            new OkeiEntry { Code = "863", Name = "Килограмм гидроксида натрия", ShortName = "кг NaOH", CodeName = "КГ ГИДРОКСИД НАТРИЯ" },
+            new OkeiEntry { Code = "865", Name = "Килограмм пятиокиси фосфора", ShortName = "кг Р2О5", CodeName = "КГ ПЯТИОКИСЬ ФОСФОРА" },
+            new OkeiEntry { Code = "867", Name = "Килограмм урана", ShortName = "кг U", CodeName = "КГ УРАН" }
+        };
+
+
+       
     }
 }

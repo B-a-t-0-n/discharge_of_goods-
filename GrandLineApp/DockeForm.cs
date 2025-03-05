@@ -66,6 +66,15 @@ namespace AppWindowsForm
             {
                 await _docke!.UpdateAll(agree!.uuid!, factory!.uuid!, trackBarSpeed.Value, checkBoxBuy.Checked).WaitAsync(new TimeSpan(2, 30, 0), TimeProvider.System);
 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Ошибка получения данных\n\n\n{ex}");
+            }
+
+            try
+            {
+
                 DockeTableExel grandLineTable = new DockeTableExel(_docke!);
                 grandLineTable.CreateTable(path);
 

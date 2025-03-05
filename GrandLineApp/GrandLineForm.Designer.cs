@@ -76,7 +76,7 @@
             panel7.Name = "panel7";
             panel7.Size = new Size(30, 28);
             panel7.TabIndex = 1;
-            panel7.Paint += panel7_Paint;
+            panel7.Click += panel7_Click;
             // 
             // labelInfoLoad
             // 

@@ -114,7 +114,7 @@ namespace AppWindowsForm
             listBoxAgreements.Items.AddRange(_grandLine.Agreements!.ToArray());
         }
 
-        private void panel7_Paint(object sender, PaintEventArgs e)
+        private void panel7_Click(object sender, EventArgs e)
         {
             Close();
         }
